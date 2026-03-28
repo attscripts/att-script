@@ -307,7 +307,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         <div class="page-subtitle">Agent tracking + submission</div>
 
         <div class="field-row">
-          <div class="field"><label>Use Case <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="use_case" id="ub" value="A backup" required><label for="ub">Backup</label></div><div class="pill"><input type="radio" name="use_case" id="um" value="Main connection"><label for="um">Main</label></div></div></div>
+          <div class="field"><label>Use Case <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="use_case" id="ub" value="A backup" required><label for="ub">Backup</label></div><div class="pill"><input type="radio" name="use_case" id="um" value="Main connection"><label for="um">Main</label></div></div><div class="conditional" id="mainNotes" style="margin-top:8px;"><input type="text" name="notes" placeholder="Notes (e.g. phone lines, main connection details)" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:13.5px;"></div></div>
           <div class="field"><label>Plan <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="plan" id="pp" value="Premium" required><label for="pp">Premium</label></div><div class="pill"><input type="radio" name="plan" id="ps" value="Standard"><label for="ps">Standard</label></div></div></div>
         </div>
         <div class="field-row">
@@ -364,6 +364,7 @@ function goM(id,btn){
 }
 
 document.querySelectorAll('input[name="ship_to_service"]').forEach(r=>{r.addEventListener('change',function(){document.getElementById('altShip').classList.toggle('show',this.value==='No');});});
+document.querySelectorAll('input[name="use_case"]').forEach(r=>{r.addEventListener('change',function(){document.getElementById('mainNotes').classList.toggle('show',this.value==='Main connection');if(this.value!=='Main connection'){const n=document.querySelector('input[name="notes"]');if(n)n.value='';}});});
 
 document.getElementById('mainForm').addEventListener('submit',async function(e){
   e.preventDefault();const btn=document.getElementById('submitBtn'),err=document.getElementById('errorBanner');
