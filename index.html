@@ -72,6 +72,13 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .tip{padding:10px 12px;margin-bottom:8px;border-radius:var(--radius-sm);background:var(--blue-bg);border-left:3px solid var(--blue);font-size:12px;color:var(--blue-dark);line-height:1.5;}
 .tip strong{font-size:10px;letter-spacing:.5px;display:block;margin-bottom:3px;color:var(--blue);}
 
+.q-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.5px;}
+.q-table th{background:var(--blue-dark);color:var(--white);padding:8px 10px;text-align:left;font-size:11px;font-weight:600;letter-spacing:.5px;}
+.q-table td{padding:8px 10px;border-bottom:1px solid var(--border);}
+.q-table tr:nth-child(even){background:var(--bg);}
+.q-table .qnum{background:var(--blue);color:var(--white);font-weight:700;text-align:center;width:30px;border-radius:4px;}
+.q-table .qnote{color:var(--text3);font-style:italic;font-size:11.5px;}
+
 .check-list{padding:4px 0 4px 4px;margin-bottom:8px;}
 .check-item{display:flex;gap:6px;padding:4px 0;font-size:13px;color:var(--text);}
 .check-item span{color:var(--green);font-weight:600;}
@@ -180,8 +187,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Close</div>
+      <button class="nav-btn form-btn" onclick="go('p6',this)"><div class="num">6</div>Data Collection</button>
       <button class="nav-btn" onclick="go('p7',this)"><div class="num">7</div>Compliance</button>
       <button class="nav-btn" onclick="go('p8',this)"><div class="num">8</div>Next Steps</button>
+      <button class="nav-btn" onclick="go('p9',this)"><div class="num">9</div>Objections</button>
     </div>
     <div style="flex:1;"></div>
     <div style="padding:10px 16px;font-size:9px;color:var(--text3);">IPTECH SV</div>
@@ -246,6 +255,30 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         <div class="tip"><strong>💡 OBJECTION — "We already have a backup"</strong>"That's smart — what are you using currently? [Listen] One advantage of AT&T Fixed Wireless is that it runs on a completely separate 5G network, so it's not dependent on the same infrastructure as your primary or existing backup."</div>
       </div>
 
+      <!-- P6 -->
+      <div class="page" id="p6">
+        <div class="page-title">Qualification & Data Collection</div>
+        <div class="page-subtitle">Phase 6 · Confirm details to send the agreement</div>
+        <div class="script-block trans"><div class="label">TRANSITION</div><p>Perfect. To get the AT&T agreement sent over to you today, I just need to confirm a few quick details about your business.</p></div>
+        <div class="note">⚠ Ask questions in this order: low-friction items first, sensitive items (Tax ID) last. Keep momentum — use a conversational cadence, not an interrogation. Fill in ALL fields on the right panel →</div>
+
+        <table class="q-table">
+          <tr><th style="width:30px">#</th><th>QUESTION</th><th>AGENT NOTES</th></tr>
+          <tr><td class="qnum">1</td><td>Is [ADDRESS] the correct service address where the Fixed Wireless Internet will be used?</td><td class="qnote">Confirm address first — easiest yes</td></tr>
+          <tr><td class="qnum">2</td><td>Can I get the proper spelling of your first and last name?</td><td class="qnote">Build rapport — use their name going forward</td></tr>
+          <tr><td class="qnum">3</td><td>What is the full legal business name?</td><td class="qnote">Must match official records</td></tr>
+          <tr><td class="qnum">4</td><td>What is the main telephone number listed for the business?</td><td class="qnote">Standard — quick answer</td></tr>
+          <tr><td class="qnum">5</td><td>And the best direct number to reach you at?</td><td class="qnote">For follow-up calls</td></tr>
+          <tr><td class="qnum">6</td><td>Do you currently have an AT&T wireless phone, personal or business? If yes, what is that number?</td><td class="qnote">Needed for bundled discount eligibility</td></tr>
+          <tr><td class="qnum">7</td><td>What address do you use for monthly billing statements?</td><td class="qnote">May differ from service address</td></tr>
+          <tr><td class="qnum">8</td><td>What email will you use to receive the AT&T agreement and shipping notifications?</td><td class="qnote">Verify spelling carefully</td></tr>
+          <tr><td class="qnum">9</td><td>What is the best address to ship the equipment to?</td><td class="qnote">Signature required on delivery</td></tr>
+          <tr><td class="qnum">10</td><td>To check for existing AT&T service and establish new service, may I have the Business Tax ID?</td><td class="qnote">Save for last — highest friction point</td></tr>
+        </table>
+
+        <div class="tip"><strong>💡 TAX ID OBJECTION HANDLER</strong>If they hesitate: "I completely understand the sensitivity. AT&T requires this solely to verify existing wireless accounts and to process the new service agreement. It's a standard business verification step — similar to what you'd provide for any new business utility."</div>
+      </div>
+
       <!-- P7 -->
       <div class="page" id="p7">
         <div class="page-title">Compliance & Close</div>
@@ -271,6 +304,35 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
           <div class="check-item"><span>✓</span> Signature required on delivery.</div>
         </div>
         <div class="script-block say"><div class="label">SAY</div><p>We'll follow up to ensure you received the email. Thank you for choosing AT&T!</p></div>
+      </div>
+
+      <!-- P9 -->
+      <div class="page" id="p9">
+        <div class="page-title">Quick Reference — Common Objections</div>
+        <div class="page-subtitle">Phase 9 · Use these responses when prospects push back</div>
+
+        <table class="q-table">
+          <tr><th style="width:180px">OBJECTION</th><th>RECOMMENDED RESPONSE</th></tr>
+          <tr><td style="font-weight:600;">"We're happy with our current provider"</td><td>"This isn't about replacing your provider — it's about protecting your business when your provider has a problem. Think of it as business continuity insurance for about $4 a day."</td></tr>
+          <tr><td style="font-weight:600;">"Send me information via email"</td><td>"I'd be happy to. What I'm sharing with you now is actually everything that would be in the email. Since I have you on the line, let me save you time — do you have any questions I can answer right now?"</td></tr>
+          <tr><td style="font-weight:600;">"I don't have time right now"</td><td>"I completely understand. This will only take about 3 more minutes. If now truly isn't a good time, what's the best time and number to reach you tomorrow?"</td></tr>
+          <tr><td style="font-weight:600;">"We don't need backup internet"</td><td>"Most businesses feel that way until an outage happens. Studies show the average small business loses over $10,000 per hour of downtime. For about $4 a day, this service ensures that never impacts your operations."</td></tr>
+          <tr><td style="font-weight:600;">"I need to check with my partner"</td><td>"Of course. Would it help if we set up a brief call with both of you? I can walk through the details in under 5 minutes. When would work for both of you?"</td></tr>
+          <tr><td style="font-weight:600;">"The 3-year commitment is too long"</td><td>"That's fair. The 3-year term is what makes the $1 router possible — without it, the equipment alone costs $275. And remember, you can cancel anytime by calling AT&T. As a last resort, keep in mind AT&T also offers a 30-day risk-free trial — if you disconnect within 30 days, you get a full refund of all service charges, taxes, and fees."</td></tr>
+        </table>
+
+        <div style="margin-top:20px;padding:16px;background:var(--blue-bg);border-radius:var(--radius);border:1px solid #B8D4F0;">
+          <div style="font-size:14px;font-weight:700;color:var(--blue-dark);margin-bottom:10px;">KEY PRODUCT FACTS — AT A GLANCE</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.7;">
+            <strong>Service:</strong> AT&T Fixed Wireless Internet (5G)<br>
+            <strong>Speeds:</strong> 300–474 Mbps average download (varies by location/device)<br>
+            <strong>Premium Price:</strong> $105/mo (includes 250GB priority data)<br>
+            <strong>Discounted Price:</strong> As low as $30/mo (w/ paperless billing + autopay + existing AT&T wireless)<br>
+            <strong>Router:</strong> $1 on 3-year term (normally $275) — shipping waived<br>
+            <strong>Daily Cost:</strong> ~$4/day (Premium at $105/mo)<br>
+            <strong>Installation:</strong> Self-install, pre-programmed equipment, signature required on delivery
+          </div>
+        </div>
       </div>
 
     </form>
