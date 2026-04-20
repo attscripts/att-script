@@ -180,10 +180,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
     <div class="sidebar-section">
       <div class="sidebar-label">Script</div>
       <button class="nav-btn active" onclick="go('p1',this)"><div class="num">1</div>Opening</button>
-      <button class="nav-btn" onclick="go('p2',this)"><div class="num">2</div>Hook</button>
-      <button class="nav-btn" onclick="go('p3',this)"><div class="num">3</div>Value Prop</button>
-      <button class="nav-btn" onclick="go('p4',this)"><div class="num">4</div>Pricing</button>
-      <button class="nav-btn" onclick="go('p5',this)"><div class="num">5</div>Trial Close</button>
+      <button class="nav-btn" onclick="go('p2',this)"><div class="num">2</div>DM Pitch</button>
+      <button class="nav-btn" onclick="go('p3',this)"><div class="num">3</div>Pricing</button>
+      <button class="nav-btn" onclick="go('p4',this)"><div class="num">4</div>Trial Close</button>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Close</div>
@@ -205,53 +204,54 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <!-- P1 -->
       <div class="page active" id="p1">
         <div class="page-title">Opening & Gatekeeper</div>
-        <div class="page-subtitle">Phase 1 · First 15 seconds</div>
-        <div class="note">⚠ Your goal in the first 15 seconds is to sound confident, identify the decision-maker, and earn permission to continue. Do NOT pitch the product yet.</div>
-        <div class="script-block say"><div class="label">SAY</div><p>Hello, my name is _______, an AT&T Solutions Provider calling on a recorded line. I'm trying to reach the person who handles internet services for the business — would that be you, or could you point me to the right person?</p></div>
-        <div class="tip"><strong>💡 GATEKEEPER STRATEGY</strong>If they say the DM is unavailable: "No problem — I'm reaching out because AT&T has pre-qualified your business location for a new 5G internet backup service. Could I get the best time and direct number to reach [DM name]?"</div>
-        <div class="note">⚠ If you reach the DM directly, confirm their role: "Are you the person who manages internet and connectivity decisions for the business?" Wait for YES before proceeding.</div>
+        <div class="page-subtitle">Phase 1 · Identify the decision-maker</div>
+        <div class="script-block say"><div class="label">SAY</div><p>Hello, my name is _____ calling on a recorded line. I am trying to reach the person who handles the internet service for <span class="live" id="live_bizname">[BUSINESS NAME]</span>. Whom might that be?</p></div>
+        <div class="tip"><strong>💡 OBJECTION — "What's this regarding?"</strong>"Ensuring your business does not lose connectivity to the internet!"</div>
+        <div class="note">⚠ Once you reach the DM, proceed to Phase 2.</div>
       </div>
 
       <!-- P2 -->
       <div class="page" id="p2">
-        <div class="page-title">Hook & Engagement</div>
-        <div class="page-subtitle">Phase 2 · Earn their attention in ~20 seconds</div>
-        <div class="note">⚠ This is the most critical moment. You have ~20 seconds to earn their attention. Lead with a problem they recognize, not a product name.</div>
-        <div class="script-block say"><div class="label">SAY</div><p>Great — the reason for my call is that your business at <span class="live" id="live_address">[ADDRESS]</span> has been pre-qualified for AT&T's Fixed Wireless Internet service.</p></div>
-        <div class="script-block ask"><div class="label">ASK</div><p>Quick question — has your business ever experienced an internet outage that disrupted operations or cost you revenue?</p></div>
-        <div class="note">⚠ If they say NO or seem dismissive: "That's great to hear. Most businesses don't think about it until it happens — and the average cost of just one hour of downtime for a small business is over $10,000. This service is designed to make sure that never becomes your reality."</div>
+        <div class="page-title">DM Pitch & Value Proposition</div>
+        <div class="page-subtitle">Phase 2 · Present the opportunity</div>
+        <div class="script-block say"><div class="label">SAY</div><p>Hello, my name is _____. I am calling today to offer your business the opportunity to take advantage of the AT&T Internet Guarantee.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Even if you have fiber, cable, or a shared connection today, outages happen — and when they do, every system in your business that depends on the internet goes down.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>As an AT&T Solutions provider I would like to offer you AT&T's Fixed Wireless Internet Backup. This service provides your business with a dedicated up to 5G wireless backup connection that works independently from your existing internet connection and keeps you connected in the event of an outage.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Utilizing the AT&T Guarantee you can try the service for the first 30 days. If you don't love it, simply return the device within 30 days of activation for a full refund.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Fixed Wireless Internet is available in two forms: one with Unlimited WIFI access giving you the ability to use the service as a second main connection for dedicated customer WIFI, office music, or any other service you may not want using your existing internet bandwidth. The other option is a straight back-up that only kicks on when your existing main connection fails.</p></div>
+        <div class="script-block ask"><div class="label">ASK</div><p>Which Fixed Wireless Internet service will work best for your business? Unlimited WIFI or Back-up Only?</p></div>
       </div>
 
       <!-- P3 -->
       <div class="page" id="p3">
-        <div class="page-title">Value Proposition</div>
-        <div class="page-subtitle">Phase 3 · Conversational, not scripted</div>
-        <div class="note">⚠ Deliver this section conversationally, not as a script read. Hit the key points but adapt to the prospect's responses.</div>
-        <div class="script-block say"><div class="label">SAY</div><p>Even if you have fiber, cable, or a shared connection today, outages happen — and when they do, everything goes down: point-of-sale, phones, email, customer-facing tools.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>AT&T Fixed Wireless Internet gives your business a dedicated 5G wireless backup with average speeds of 300–474 Mbps. It works independently — if one goes down, the other keeps you running.</p></div>
-        <div class="script-block trans"><div class="label">TRANSITION</div><p>And here's the part that makes this a no-brainer — let me walk you through the pricing.</p></div>
-      </div>
-
-      <!-- P4 -->
-      <div class="page" id="p4">
-        <div class="page-title">Pricing & Offer</div>
-        <div class="page-subtitle">Phase 4 · Stack value, then reveal discounts</div>
-        <div class="note">⚠ Stack the value. Present the full price first, then reveal discounts one at a time to create a "price drop" effect.</div>
+        <div class="page-title">Pricing & Options</div>
+        <div class="page-subtitle">Phase 3 · Present pricing and plan options</div>
         <div class="script-block say"><div class="label">SAY</div><p>AT&T Fixed Wireless Premium normally runs $105/month and includes 250GB of priority data for your critical business applications.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>But right now, AT&T has reduced the price to as low as $30/month with paperless billing, autopay, and existing AT&T wireless service.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>But right now, AT&T has reduced the price to as low as $65/month with paperless billing, autopay, and existing AT&T wireless service.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Option 2 — the Standard service for $65/mo, and you can bring it down to $30 a month with paperless billing, autopay, and existing AT&T wireless service.</p></div>
         <div class="script-block say"><div class="label">SAY</div><p>The 5G router — normally $275 — is just $1 on a 3-year term. And shipping is waived.</p></div>
         <div class="script-block say"><div class="label">SAY</div><p>So for roughly $4 a day, your business gets a fully independent backup internet connection backed by AT&T's 5G network and the AT&T Business Guarantee.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>We also offer a Basic Wireless Backup for $30/mo. It does not offer priority data and only works when your existing primary circuit goes down but would give you peace of mind for only $1 a day. Which one would you like?</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>If you cannot get autopay or paperless billing or get a cell phone with AT&T — we also offer a Basic Wireless Backup for $30/mo. It does not offer priority data and only works when your existing primary circuit goes down but would give you peace of mind for only $1 a day. Which one would you like?</p></div>
+
+        <div style="margin:12px 0;padding:14px;background:var(--blue-bg);border-radius:var(--radius);border:1px solid #B8D4F0;">
+          <div style="font-size:13px;font-weight:700;color:var(--blue-dark);margin-bottom:8px;">PLAN OPTIONS:</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.8;">
+            <strong>Option 1 — Premium:</strong> $65/mo with paperless billing, autopay, and existing AT&T wireless service<br>
+            <strong>Option 2 — Standard:</strong> $30/mo with paperless billing, autopay, and existing AT&T wireless service<br>
+            <strong>Option 3 — Basic:</strong> $30/mo — NO paperless billing, autopay, or AT&T wireless service
+          </div>
+        </div>
+
         <div class="script-block say"><div class="label">SAY</div><p>You will receive a dedicated bill for AT&T Fixed Wireless Internet, billed separately from any other AT&T services.</p></div>
         <div class="tip"><strong>💡 OBJECTION — "That sounds expensive"</strong>Reframe: "I understand — let me put it this way. One hour of downtime can cost a business thousands in lost revenue and productivity. This service costs roughly $4 a day. It's not an expense — it's insurance for your business operations."</div>
       </div>
 
-      <!-- P5 -->
-      <div class="page" id="p5">
+      <!-- P4 -->
+      <div class="page" id="p4">
         <div class="page-title">Trial Close</div>
-        <div class="page-subtitle">Phase 5 · Move to action</div>
-        <div class="script-block ask"><div class="label">ASK</div><p>Based on what I've shared, does it make sense to get this set up as a backup for your business?</p></div>
-        <div class="note">⚠ Wait for a response. If YES → proceed to fill the form. If HESITANT → handle objection. If NO → ask what their concern is.</div>
+        <div class="page-subtitle">Phase 4 · Move to action</div>
+        <div class="script-block ask"><div class="label">ASK</div><p>Based on what I've shared, does it make sense to get this set up for your business?</p></div>
+        <div class="note">⚠ Wait for a response. If YES → proceed to fill the form (Phase 6). If HESITANT → handle objection. If NO → ask what their concern is.</div>
         <div class="tip"><strong>💡 OBJECTION — "I need to think about it"</strong>"Absolutely, I respect that. Just so you know, the $1 router promotion and waived shipping are current limited-time offers. What specific concern would you want to think through? Maybe I can help clarify right now."</div>
         <div class="tip"><strong>💡 OBJECTION — "We already have a backup"</strong>"That's smart — what are you using currently? [Listen] One advantage of AT&T Fixed Wireless is that it runs on a completely separate 5G network, so it's not dependent on the same infrastructure as your primary or existing backup."</div>
       </div>
@@ -286,7 +286,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         <div class="page-subtitle">Phase 7 · Required disclosure — read clearly</div>
         <div class="note">⚠ This section is required for regulatory compliance. Read it clearly and at a moderate pace. Do not rush through it.</div>
         <div class="script-block say"><div class="label">SAY</div><p>I appreciate your time — we're almost done. AT&T must disclose certain information and obtain your consent.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>The AT&T Wireless Agreement is being emailed to <span class="live" id="live_email">[EMAIL ADDRESS]</span>. Upon acceptance, you agree to activate Fixed Wireless Premium at the premium rate of $105/month. You can retain premium with paperless billing and autopay for discounts, or switch to basic for as low as $30/month.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>The AT&T Wireless Agreement is being emailed to <span class="live" id="live_email">[EMAIL ADDRESS]</span>. Upon acceptance, you agree to activate Fixed Wireless Premium at the premium rate of $105/month. You can retain premium with paperless billing and autopay for discounts at $65/month, or switch to basic for as low as $30/month.</p></div>
         <div class="script-block say"><div class="label">SAY</div><p>The agreement covers standard AT&T wireless policy and does not contain pricing.</p></div>
         <div class="script-block say"><div class="label">SAY</div><p>Billing begins upon shipment, renews monthly. Cancel anytime. 3-year term.</p></div>
         <div class="script-block say"><div class="label">SAY</div><p>We ask that you not confuse your AT&T Fixed Wireless bill with other AT&T services you may have. Fixed Wireless is billed separately and requires its own payment. This is why we highly encourage you to set up AUTOPAY.</p></div>
@@ -330,8 +330,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
           <div style="font-size:13px;color:var(--text);line-height:1.7;">
             <strong>Service:</strong> AT&T Fixed Wireless Internet (5G)<br>
             <strong>Speeds:</strong> 300–474 Mbps average download (varies by location/device)<br>
-            <strong>Premium Price:</strong> $105/mo (includes 250GB priority data)<br>
-            <strong>Discounted Price:</strong> As low as $30/mo (w/ paperless billing + autopay + existing AT&T wireless)<br>
+            <strong>Premium Price:</strong> $105/mo (includes 250GB priority data) → $65/mo with discounts<br>
+            <strong>Standard Price:</strong> $65/mo → $30/mo with paperless billing + autopay + AT&T wireless<br>
+            <strong>Basic Price:</strong> $30/mo — no discounts, backup only<br>
             <strong>Router:</strong> $1 on 3-year term (normally $275) — shipping waived<br>
             <strong>Daily Cost:</strong> ~$4/day (Premium at $105/mo)<br>
             <strong>Installation:</strong> Self-install, pre-programmed equipment, signature required on delivery
@@ -390,7 +391,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="form-section-label">Agent Tracking</div>
       <div class="field-row">
         <div class="field"><label>Use Case <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="use_case" id="ub" value="A backup" form="mainForm" required><label for="ub">Backup</label></div><div class="pill"><input type="radio" name="use_case" id="um" value="Main connection" form="mainForm"><label for="um">Main</label></div></div></div>
-        <div class="field"><label>Plan <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="plan" id="pp" value="Premium" form="mainForm" required><label for="pp">Premium</label></div><div class="pill"><input type="radio" name="plan" id="ps" value="Basic" form="mainForm"><label for="ps">Basic</label></div></div></div>
+        <div class="field"><label>Plan <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="plan" id="pp" value="Premium" form="mainForm" required><label for="pp">Premium</label></div><div class="pill"><input type="radio" name="plan" id="ps" value="Standard" form="mainForm"><label for="ps">Standard</label></div><div class="pill"><input type="radio" name="plan" id="pb" value="Basic" form="mainForm"><label for="pb">Basic</label></div></div></div>
       </div>
       <div class="conditional" id="mainNotes" style="margin-bottom:10px;"><div class="field"><label>Main connection notes</label><input type="text" name="notes" form="mainForm" placeholder="Phone lines, details..."></div></div>
       <div class="field-row">
@@ -401,7 +402,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="form-divider"></div>
       <div class="billing-bar"><strong>⚠</strong> AT&T Fixed Wireless is billed separately. Confirm customer is aware.</div>
       <button type="submit" form="mainForm" class="btn-submit" id="submitBtn">Submit to Google Sheets</button>
-      <div style="text-align:center;"><button type="button" class="btn-clear" onclick="if(confirm('Clear all fields?')){document.getElementById('mainForm').reset();document.getElementById('altShip').classList.remove('show');document.getElementById('mainNotes').classList.remove('show');go('p1',document.querySelector('.nav-btn'));updateLive('live_address','','[ADDRESS]');updateLive('live_email','','[EMAIL ADDRESS]');}">Clear Form</button></div>
+      <div style="text-align:center;"><button type="button" class="btn-clear" onclick="if(confirm('Clear all fields?')){document.getElementById('mainForm').reset();document.getElementById('altShip').classList.remove('show');document.getElementById('mainNotes').classList.remove('show');go('p1',document.querySelector('.nav-btn'));updateLive('live_address','','[ADDRESS]');updateLive('live_email','','[EMAIL ADDRESS]');updateLive('live_bizname','','[BUSINESS NAME]');}">Clear Form</button></div>
     </div>
   </div>
 
@@ -413,9 +414,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   <button onclick="goM('p2',this)">2</button>
   <button onclick="goM('p3',this)">3</button>
   <button onclick="goM('p4',this)">4</button>
-  <button onclick="goM('p5',this)">5</button>
+  <button onclick="goM('p6',this)" style="background:var(--orange-bg);color:#B35C00;">6 ✏️</button>
   <button onclick="goM('p7',this)">7</button>
   <button onclick="goM('p8',this)">8</button>
+  <button onclick="goM('p9',this)">9</button>
 </div>
 
 <script>
@@ -472,12 +474,12 @@ function resetForm(){
   document.getElementById('successMsg').classList.remove('show');
   document.getElementById('altShip').classList.remove('show');
   document.getElementById('mainNotes').classList.remove('show');
-  updateLive('live_address','','[ADDRESS]');updateLive('live_email','','[EMAIL ADDRESS]');
+  updateLive('live_address','','[ADDRESS]');updateLive('live_email','','[EMAIL ADDRESS]');updateLive('live_bizname','','[BUSINESS NAME]');
   go('p1',document.querySelector('.nav-btn'));
 }
 
 function updateLive(id,v,fb){const el=document.getElementById(id);if(!el)return;if(v&&v.trim()){el.textContent=v.trim();el.classList.add('filled');el.classList.remove('empty');}else{el.textContent=fb;el.classList.remove('filled');el.classList.add('empty');}}
-const lb={'service_address':{id:'live_address',fallback:'[ADDRESS]'},'dm_email':{id:'live_email',fallback:'[EMAIL ADDRESS]'}};
+const lb={'service_address':{id:'live_address',fallback:'[ADDRESS]'},'dm_email':{id:'live_email',fallback:'[EMAIL ADDRESS]'},'legal_business_name':{id:'live_bizname',fallback:'[BUSINESS NAME]'}};
 document.querySelectorAll('input,textarea,select').forEach(f=>{const b=lb[f.name];if(b)f.addEventListener('input',function(){updateLive(b.id,this.value,b.fallback);});});
 </script>
 </body>
