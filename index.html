@@ -183,11 +183,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <button class="nav-btn" onclick="go('p2',this)"><div class="num">2</div>DM Pitch</button>
       <button class="nav-btn" onclick="go('p3',this)"><div class="num">3a</div>WIFI Pricing</button>
       <button class="nav-btn" onclick="go('p3b',this)"><div class="num">3b</div>Backup Pricing</button>
-      <button class="nav-btn" onclick="go('p4',this)"><div class="num">4</div>Trial Close</button>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Close</div>
-      <button class="nav-btn form-btn" onclick="go('p6',this)"><div class="num">6</div>Data Collection</button>
+      <button class="nav-btn form-btn" onclick="go('p6',this)"><div class="num">6</div>Close & Data Collect</button>
       <button class="nav-btn" onclick="go('p7',this)"><div class="num">7</div>Compliance</button>
       <button class="nav-btn" onclick="go('p8',this)"><div class="num">8</div>Next Steps</button>
       <button class="nav-btn" onclick="go('p9',this)"><div class="num">9</div>Objections</button>
@@ -262,15 +261,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         <div class="script-block say"><div class="label">SAY</div><p>You will receive a dedicated bill for AT&T Fixed Wireless Internet, billed separately from any other AT&T services.</p></div>
       </div>
 
-      <!-- P4 -->
-      <div class="page" id="p4">
-        <div class="page-title">Trial Close</div>
-        <div class="page-subtitle">Phase 4 · Move to action</div>
-        <div class="script-block ask"><div class="label">ASK</div><p>Based on what I've shared, does it make sense to get this set up for your business?</p></div>
-        <div class="note">⚠ Wait for a response. If YES → proceed to fill the form (Phase 6). If HESITANT → handle objection. If NO → ask what their concern is.</div>
-        <div class="tip"><strong>💡 OBJECTION — "I need to think about it"</strong>"Absolutely, I respect that. Just so you know, the $1 router promotion and waived shipping are current limited-time offers. What specific concern would you want to think through? Maybe I can help clarify right now."</div>
-        <div class="tip"><strong>💡 OBJECTION — "We already have a backup"</strong>"That's smart — what are you using currently? [Listen] One advantage of AT&T Fixed Wireless is that it runs on a completely separate 5G network, so it's not dependent on the same infrastructure as your primary or existing backup."</div>
-      </div>
 
       <!-- P6 -->
       <div class="page" id="p6">
@@ -339,6 +329,8 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
           <tr><td style="font-weight:600;">"We don't need backup internet"</td><td>"Most businesses feel that way until an outage happens. Studies show the average small business loses over $10,000 per hour of downtime. For about $4 a day, this service ensures that never impacts your operations."</td></tr>
           <tr><td style="font-weight:600;">"I need to check with my partner"</td><td>"Of course. Would it help if we set up a brief call with both of you? I can walk through the details in under 5 minutes. When would work for both of you?"</td></tr>
           <tr><td style="font-weight:600;">"The 3-year commitment is too long"</td><td>"That's fair. The 3-year term is what makes the $1 router possible — without it, the equipment alone costs $275. And remember, you can cancel anytime by calling AT&T. As a last resort, keep in mind AT&T also offers a 30-day risk-free trial — if you disconnect within 30 days, you get a full refund of all service charges, taxes, and fees."</td></tr>
+          <tr><td style="font-weight:600;">"I need to think about it"</td><td>"Absolutely, I respect that. Just so you know, the $1 router promotion and waived shipping are current limited-time offers. What specific concern would you want to think through? Maybe I can help clarify right now."</td></tr>
+          <tr><td style="font-weight:600;">"We already have a backup"</td><td>"That's smart — what are you using currently? [Listen] One advantage of AT&T Fixed Wireless is that it runs on a completely separate 5G network, so it's not dependent on the same infrastructure as your primary or existing backup."</td></tr>
         </table>
 
         <div style="margin-top:20px;padding:16px;background:var(--blue-bg);border-radius:var(--radius);border:1px solid #B8D4F0;">
@@ -430,7 +422,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   <button onclick="goM('p2',this)">2</button>
   <button onclick="goM('p3',this)">3a</button>
   <button onclick="goM('p3b',this)">3b</button>
-  <button onclick="goM('p4',this)">4</button>
   <button onclick="goM('p6',this)" style="background:var(--orange-bg);color:#B35C00;">6 ✏️</button>
   <button onclick="goM('p7',this)">7</button>
   <button onclick="goM('p8',this)">8</button>
