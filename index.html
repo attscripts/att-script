@@ -181,7 +181,8 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="sidebar-label">Script</div>
       <button class="nav-btn active" onclick="go('p1',this)"><div class="num">1</div>Opening</button>
       <button class="nav-btn" onclick="go('p2',this)"><div class="num">2</div>DM Pitch</button>
-      <button class="nav-btn" onclick="go('p3',this)"><div class="num">3</div>Pricing</button>
+      <button class="nav-btn" onclick="go('p3',this)"><div class="num">3a</div>WIFI Pricing</button>
+      <button class="nav-btn" onclick="go('p3b',this)"><div class="num">3b</div>Backup Pricing</button>
       <button class="nav-btn" onclick="go('p4',this)"><div class="num">4</div>Trial Close</button>
     </div>
     <div class="sidebar-section">
@@ -224,8 +225,8 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
       <!-- P3 -->
       <div class="page" id="p3">
-        <div class="page-title">Pricing & Options</div>
-        <div class="page-subtitle">Phase 3 · Present pricing and plan options</div>
+        <div class="page-title">WIFI Pricing</div>
+        <div class="page-subtitle">Phase 3a · Unlimited WIFI plan options</div>
         <div class="script-block say"><div class="label">SAY</div><p>AT&T Fixed Wireless Premium normally runs $105/month and includes 250GB of priority data for your critical business applications.</p></div>
         <div class="script-block say"><div class="label">SAY</div><p>But right now, AT&T has reduced the price to as low as $65/month with paperless billing, autopay, and existing AT&T wireless service.</p></div>
         <div class="script-block say"><div class="label">SAY</div><p>Option 2 — the Standard service for $65/mo, and you can bring it down to $30 a month with paperless billing, autopay, and existing AT&T wireless service.</p></div>
@@ -249,7 +250,16 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         </div>
 
         <div class="script-block say"><div class="label">SAY</div><p>You will receive a dedicated bill for AT&T Fixed Wireless Internet, billed separately from any other AT&T services.</p></div>
-        <div class="tip"><strong>💡 OBJECTION — "That sounds expensive"</strong>Reframe: "I understand — let me put it this way. One hour of downtime can cost a business thousands in lost revenue and productivity. This service costs roughly $4 a day. It's not an expense — it's insurance for your business operations."</div>
+        <div class="tip"><strong>💡 OBJECTION — "That sounds expensive"</strong>Reframe: "I understand — let me put it this way. One hour of downtime can cost a business thousands in lost revenue and productivity. It's not an expense — it's insurance for your business operations."</div>
+      </div>
+
+      <!-- P3b -->
+      <div class="page" id="p3b">
+        <div class="page-title">Backup Pricing</div>
+        <div class="page-subtitle">Phase 3b · Backup Only plan</div>
+        <div class="script-block say"><div class="label">SAY</div><p>Basic Backup Only is $30/mo. This cost effective, $1 per day package activates automatically if your existing primary circuit experiences an outage.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>The 5G router — normally $275 — is just $1 on a 3-year term. And shipping is waived.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>You will receive a dedicated bill for AT&T Fixed Wireless Internet, billed separately from any other AT&T services.</p></div>
       </div>
 
       <!-- P4 -->
@@ -266,7 +276,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="page" id="p6">
         <div class="page-title">Qualification & Data Collection</div>
         <div class="page-subtitle">Phase 6 · Confirm details to send the agreement</div>
-        <div class="script-block trans"><div class="label">TRANSITION</div><p>Perfect. To get the AT&T agreement sent over to you today, I just need to confirm a few quick details about your business.</p></div>
+        <div class="script-block trans"><div class="label">TRANSITION</div><p>To get the AT&T agreement sent over to you today, I just need to confirm a few quick details about your business.</p></div>
         <div class="note">⚠ Ask questions in this order: low-friction items first, sensitive items (Tax ID) last. Keep momentum — use a conversational cadence, not an interrogation. Fill in ALL fields on the right panel →</div>
 
         <table class="q-table">
@@ -418,7 +428,8 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 <div class="mobile-nav">
   <button class="active" onclick="goM('p1',this)">1</button>
   <button onclick="goM('p2',this)">2</button>
-  <button onclick="goM('p3',this)">3</button>
+  <button onclick="goM('p3',this)">3a</button>
+  <button onclick="goM('p3b',this)">3b</button>
   <button onclick="goM('p4',this)">4</button>
   <button onclick="goM('p6',this)" style="background:var(--orange-bg);color:#B35C00;">6 ✏️</button>
   <button onclick="goM('p7',this)">7</button>
