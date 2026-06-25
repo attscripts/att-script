@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AT&T Fixed Wireless — V6</title>
+<title>AT&T Digital Transition — Script + Form</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -19,124 +19,74 @@
   --radius:10px;--radius-sm:6px;
 }
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;font-size:13.5px;-webkit-font-smoothing:antialiased;}
-
-/* ── 3-COLUMN LAYOUT ── */
 .app{display:flex;height:100vh;overflow:hidden;}
-
-/* ── LEFT SIDEBAR (NAV) ── */
-.sidebar{
-  width:200px;min-width:200px;background:var(--sidebar);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;padding:16px 0;overflow-y:auto;
-}
+.sidebar{width:210px;min-width:210px;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:16px 0;overflow-y:auto;}
 .sidebar-brand{padding:0 16px 16px;border-bottom:1px solid var(--border);margin-bottom:10px;}
 .sidebar-brand h1{font-size:13px;font-weight:700;color:var(--text);letter-spacing:-.3px;}
 .sidebar-brand p{font-size:10px;color:var(--text3);margin-top:2px;}
 .sidebar-section{padding:0 10px;margin-bottom:12px;}
 .sidebar-label{font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;padding:0 8px;margin-bottom:5px;}
-.nav-btn{
-  display:flex;align-items:center;gap:8px;width:100%;padding:7px 10px;
-  border:none;background:transparent;border-radius:var(--radius-sm);
-  cursor:pointer;font-family:inherit;font-size:12px;font-weight:500;color:var(--text2);
-  text-align:left;transition:all .15s;
-}
+.nav-btn{display:flex;align-items:center;gap:8px;width:100%;padding:7px 10px;border:none;background:transparent;border-radius:var(--radius-sm);cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:500;color:var(--text2);text-align:left;transition:all .15s;}
 .nav-btn:hover{background:var(--border);color:var(--text);}
 .nav-btn.active{background:var(--blue-bg);color:var(--blue);font-weight:600;}
-.nav-btn .num{
-  width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;
-  font-size:9px;font-weight:700;background:var(--border);color:var(--text2);flex-shrink:0;
-}
+.nav-btn .num{width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;background:var(--border);color:var(--text2);flex-shrink:0;}
 .nav-btn.active .num{background:var(--blue);color:var(--white);}
 .nav-btn.form-btn .num{background:var(--orange);color:var(--white);}
 .nav-btn.form-btn.active .num{background:var(--orange);}
 .nav-btn.form-btn.active{background:var(--orange-bg);color:#B35C00;}
-
-/* ── CENTER (SCRIPT) ── */
 .main{flex:1;overflow-y:auto;padding:28px 32px 60px;background:var(--bg);}
-.page{display:none;max-width:600px;}
+.page{display:none;max-width:620px;}
 .page.active{display:block;}
 .page-title{font-size:20px;font-weight:700;letter-spacing:-.5px;color:var(--text);margin-bottom:3px;}
 .page-subtitle{font-size:12px;color:var(--text3);margin-bottom:20px;}
-
-/* ── SCRIPT BLOCKS ── */
 .script-block{padding:12px 14px;margin-bottom:8px;border-radius:var(--radius);border:1px solid var(--border);background:var(--white);}
 .script-block .label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.6px;padding:2px 8px;border-radius:4px;margin-bottom:6px;}
-.script-block.say{background:var(--white);border:1px solid var(--border);}
 .script-block.say .label{background:var(--green-bg);color:var(--green-dark);}
 .script-block.say p{font-weight:600;color:#1A1A1A;font-size:15px;}
 .script-block.ask .label{background:var(--blue-bg);color:var(--blue);}
 .script-block.ask p{font-weight:600;color:#1A1A1A;font-size:15px;}
 .script-block.trans .label{background:var(--purple-bg);color:var(--purple);}
 .script-block p{font-size:14px;color:var(--text);line-height:1.65;}
-
 .note{padding:10px 12px;margin-bottom:8px;border-radius:var(--radius-sm);background:var(--orange-bg);border-left:3px solid var(--orange);font-size:12px;color:#8B5E00;line-height:1.5;font-style:italic;}
 .tip{padding:10px 12px;margin-bottom:8px;border-radius:var(--radius-sm);background:var(--blue-bg);border-left:3px solid var(--blue);font-size:12px;color:var(--blue-dark);line-height:1.5;}
 .tip strong{font-size:10px;letter-spacing:.5px;display:block;margin-bottom:3px;color:var(--blue);}
-
-.q-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.5px;}
-.q-table th{background:var(--blue-dark);color:var(--white);padding:8px 10px;text-align:left;font-size:11px;font-weight:600;letter-spacing:.5px;}
-.q-table td{padding:8px 10px;border-bottom:1px solid var(--border);}
-.q-table tr:nth-child(even){background:var(--bg);}
-.q-table .qnum{background:var(--blue);color:var(--white);font-weight:700;text-align:center;width:30px;border-radius:4px;}
-.q-table .qnote{color:var(--text3);font-style:italic;font-size:11.5px;}
-
+.price-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.5px;}
+.price-table th{background:var(--blue-dark);color:var(--white);padding:8px 10px;text-align:center;font-size:11px;font-weight:600;}
+.price-table td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:center;}
+.price-table tr:nth-child(even){background:var(--bg);}
 .check-list{padding:4px 0 4px 4px;margin-bottom:8px;}
 .check-item{display:flex;gap:6px;padding:4px 0;font-size:13px;color:var(--text);}
 .check-item span{color:var(--green);font-weight:600;}
-
 .live{color:var(--blue);font-weight:600;border-bottom:2px solid var(--blue);padding-bottom:1px;transition:all .3s;}
 .live.filled{color:var(--green-dark);border-color:var(--green);}
-
-/* ── RIGHT PANEL (FORM - ALWAYS VISIBLE) ── */
-.form-panel{
-  width:320px;min-width:320px;background:var(--white);border-left:1px solid var(--border);
-  overflow-y:auto;display:flex;flex-direction:column;
-}
-.form-panel-header{
-  padding:12px 16px;background:var(--orange);color:var(--white);
-  font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
-  position:sticky;top:0;z-index:10;
-}
+.form-panel{width:320px;min-width:320px;background:var(--white);border-left:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column;}
+.form-panel-header{padding:12px 16px;background:var(--orange);color:var(--white);font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;position:sticky;top:0;z-index:10;}
 .form-panel-body{padding:14px 16px;flex:1;overflow-y:auto;}
-
-.form-mandatory{
-  background:#FFF0F0;border:1px solid #FFD4D4;border-radius:var(--radius-sm);
-  padding:8px 12px;margin-bottom:12px;font-size:11px;color:var(--red);font-weight:600;
-  text-align:center;
-}
-
+.form-mandatory{background:#FFF0F0;border:1px solid #FFD4D4;border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:12px;font-size:11px;color:var(--red);font-weight:600;text-align:center;}
 .field{margin-bottom:10px;}
 .field label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:4px;}
 .field label .req{color:var(--red);margin-left:1px;}
 .field label .hint{font-weight:400;color:var(--text3);font-size:10px;}
-.field input,.field textarea,.field select{
-  width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);
-  font-family:inherit;font-size:13px;color:var(--text);background:var(--white);transition:border .15s;
-}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,113,227,.1);}
-.field textarea{resize:vertical;min-height:40px;}
+.field input,.field textarea,.field select{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;color:var(--text);background:var(--white);transition:border .15s;}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,113,227,.1);}
 .field-row{display:flex;gap:8px;}
 .field-row .field{flex:1;}
-
 .pills{display:flex;gap:4px;flex-wrap:wrap;}
-.pill{flex:1;min-width:60px;}
+.pill{flex:1;min-width:55px;}
 .pill input{display:none;}
 .pill label{display:block;padding:7px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);text-align:center;cursor:pointer;font-size:11px;font-weight:500;color:var(--text2);transition:all .15s;margin-bottom:0;}
 .pill input:checked+label{border-color:var(--blue);background:var(--blue-bg);color:var(--blue);font-weight:600;}
 .pill label:hover{border-color:var(--border-hover);}
-
 .conditional{display:none;margin-top:6px;}
 .conditional.show{display:block;}
-
 .form-divider{height:1px;background:var(--border);margin:14px 0;}
 .form-section-label{font-size:9px;font-weight:700;color:var(--orange);letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px;}
-
 .billing-bar{padding:8px 10px;border-radius:var(--radius-sm);background:var(--orange-bg);border-left:3px solid var(--orange);font-size:11px;color:#8B5E00;margin-bottom:12px;font-weight:500;}
 .btn-submit{width:100%;padding:12px;border:none;border-radius:var(--radius);background:var(--blue);color:var(--white);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s;}
 .btn-submit:hover{background:var(--blue-dark);}
 .btn-submit:disabled{background:var(--text3);cursor:wait;}
 .btn-clear{background:none;border:none;color:var(--text3);font-family:inherit;font-size:10px;cursor:pointer;margin-top:8px;padding:3px;}
 .btn-clear:hover{color:var(--red);}
-
 .success{display:none;text-align:center;padding:40px 16px;}
 .success.show{display:block;}
 .success .icon{font-size:36px;margin-bottom:8px;}
@@ -144,28 +94,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .success p{color:var(--text2);font-size:12px;margin-top:3px;}
 .success .name{font-weight:600;color:var(--text);margin-top:4px;font-size:13px;}
 .success .btn-new{margin-top:14px;background:var(--green-dark);color:var(--white);border:none;padding:9px 24px;font-family:inherit;font-size:12px;font-weight:600;border-radius:var(--radius-sm);cursor:pointer;}
-
 .error-banner{display:none;background:#FFF0F0;border:1px solid #FFD4D4;color:var(--red);padding:8px 12px;border-radius:var(--radius-sm);margin-bottom:10px;font-size:11px;font-weight:500;}
 .error-banner.show{display:block;}
-
-/* ── MOBILE ── */
-@media(max-width:900px){
-  .sidebar{display:none;}
-  .form-panel{display:none;}
-  .main{padding:16px 14px 60px;}
-  .field-row{flex-direction:column;}
-  .mobile-nav{display:flex !important;}
-  /* Show form fields inline on mobile */
-  .mobile-form{display:block !important;}
-}
-.mobile-nav{
-  display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
-  background:var(--white);border-top:1px solid var(--border);
-  padding:6px 8px;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;
-}
+@media(max-width:900px){.sidebar{display:none;}.form-panel{display:none;}.main{padding:16px 14px 60px;}.field-row{flex-direction:column;}.mobile-nav{display:flex !important;}}
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--white);border-top:1px solid var(--border);padding:6px 8px;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
 .mobile-nav button{flex-shrink:0;padding:6px 10px;border:none;border-radius:20px;font-family:inherit;font-size:10px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--text2);white-space:nowrap;}
 .mobile-nav button.active{background:var(--blue);color:var(--white);}
-.mobile-form{display:none;}
 </style>
 </head>
 <body>
@@ -174,22 +108,27 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   <!-- LEFT SIDEBAR -->
   <nav class="sidebar">
     <div class="sidebar-brand">
-      <h1>AT&T Fixed Wireless</h1>
-      <p>V6 Script + Form</p>
+      <h1>AT&T Digital Transition</h1>
+      <p>Copper → Digital Script</p>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Script</div>
       <button class="nav-btn active" onclick="go('p1',this)"><div class="num">1</div>Opening</button>
-      <button class="nav-btn" onclick="go('p2',this)"><div class="num">2</div>DM Pitch</button>
-      <button class="nav-btn" onclick="go('p3',this)"><div class="num">3a</div>WIFI Pricing</button>
-      <button class="nav-btn" onclick="go('p3b',this)"><div class="num">3b</div>Backup Pricing</button>
+      <button class="nav-btn" onclick="go('p2',this)"><div class="num">2</div>DM Qualification</button>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Solutions</div>
+      <button class="nav-btn" onclick="go('p3a',this)"><div class="num">3a</div>1-Line: Desk Phone</button>
+      <button class="nav-btn" onclick="go('p3b',this)"><div class="num">3b</div>1-Line: Cell Phone</button>
+      <button class="nav-btn" onclick="go('p4',this)"><div class="num">4</div>Multi-Line (2-5)</button>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Close</div>
-      <button class="nav-btn form-btn" onclick="go('p6',this)"><div class="num">6</div>Close & Data Collect</button>
+      <button class="nav-btn form-btn" onclick="go('p5',this)"><div class="num">5</div>Data Collection</button>
+      <button class="nav-btn" onclick="go('p6a',this)"><div class="num">6a</div>Next: Office@Hand</button>
+      <button class="nav-btn" onclick="go('p6b',this)"><div class="num">6b</div>Next: New Cell</button>
       <button class="nav-btn" onclick="go('p7',this)"><div class="num">7</div>Compliance</button>
-      <button class="nav-btn" onclick="go('p8',this)"><div class="num">8</div>Next Steps</button>
-      <button class="nav-btn" onclick="go('p9',this)"><div class="num">9</div>Objections</button>
+      <button class="nav-btn" onclick="go('p8',this)"><div class="num">8</div>Close</button>
     </div>
     <div style="flex:1;"></div>
     <div style="padding:10px 16px;font-size:9px;color:var(--text3);">IPTECH SV</div>
@@ -197,155 +136,185 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
   <!-- CENTER: SCRIPT -->
   <div class="main" id="mainArea">
-    <div class="error-banner" id="errorBanner">⚠ Please fill ALL required fields before submitting. No field should be left empty.</div>
-
+    <div class="error-banner" id="errorBanner">⚠ Please fill ALL required fields before submitting.</div>
     <form id="mainForm" autocomplete="off">
 
-      <!-- P1 -->
+      <!-- P1: OPENING -->
       <div class="page active" id="p1">
         <div class="page-title">Opening & Gatekeeper</div>
-        <div class="page-subtitle">Phase 1 · Identify the decision-maker</div>
-        <div class="script-block say"><div class="label">SAY</div><p>Hello, my name is _______. I am trying to reach the person who handles the internet service for <span class="live" id="live_bizname">[BUSINESS NAME]</span> at <span class="live" id="live_address">[ADDRESS]</span>. Whom might that be?</p></div>
-        <div class="tip"><strong>💡 OBJECTION — "What's this regarding?"</strong>"Ensuring your business does not lose connectivity to the internet!"</div>
-        <div class="note">⚠ Once you reach the DM, proceed to Phase 2.</div>
+        <div class="page-subtitle">Phase 1 · AT&T copper-to-digital transition hook</div>
+        <div class="script-block say"><div class="label">SAY</div><p>Hello my name is ______ calling on behalf of an AT&T Solutions provider regarding AT&T's transition to an all-digital network and how that directly impacts your business.</p></div>
+        <div class="script-block ask"><div class="label">ASK</div><p>Are you the person that manages the AT&T account?</p></div>
+        <div class="tip"><strong>💡 IF NO</strong>"Okay, my goal is to keep your business connected during this transition, whom do I need to speak with? Is _____ available?"</div>
+        <div class="tip"><strong>💡 IF DM NOT AVAILABLE</strong>"Is there a direct line to reach _____? What is the best time to reach _____ at the business? Thank you for your time today, I look forward to speaking with _____ in the near future."</div>
+        <div class="note">⚠ If YES → proceed to Phase 2 (DM Qualification)</div>
       </div>
 
-      <!-- P2 -->
+      <!-- P2: DM QUALIFICATION -->
       <div class="page" id="p2">
-        <div class="page-title">DM Pitch & Value Proposition</div>
-        <div class="page-subtitle">Phase 2 · Present the opportunity</div>
-        <div class="script-block say"><div class="label">SAY</div><p>Hello, my name is _____ on a recorded line calling today to offer your business the opportunity to take advantage of the AT&T Internet Guarantee.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>As an AT&T Solutions provider I would like to offer you AT&T's Fixed Wireless Internet Backup. Even if you have fiber, cable, or a shared connection today, outages happen. This service provides your business with a dedicated up to 5G wireless backup connection that works independently from your existing internet connection and keeps you connected in the event of an outage.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>The best part is by utilizing the AT&T Guarantee you can try the service for the first 30 days. If you don't love it, simply return the device within 30 days of activation for a full refund.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>Fixed Wireless Internet is available in two forms: one with Unlimited WIFI and priority data, or the other option is a straight back-up that only activates when your existing main connection fails.</p></div>
-        <div class="script-block ask"><div class="label">ASK</div><p>Which Fixed Wireless Internet service will work best for you? Unlimited WIFI or Back-up Only?</p></div>
+        <div class="page-title">DM Qualification</div>
+        <div class="page-subtitle">Phase 2 · Verify address, count lines, assess needs</div>
+        <div class="script-block say"><div class="label">SAY</div><p>I'm sorry, I didn't catch your name, whom am I speaking with?</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p><span class="live" id="live_dm">[DM NAME]</span>, my name is _______ and your account was sent to me for two reasons: one, it appears you are still using AT&T's shared copper connection, and secondly, AT&T Shared Fiber is not yet available to your business. Is your business still located at <span class="live" id="live_address">[ADDRESS]</span>?</p></div>
+        <div class="tip"><strong>💡 IF YES</strong></div>
+        <div class="script-block ask"><div class="label">ASK</div><p>Okay, how many phone numbers are you still using at the business?</p></div>
+        <div class="script-block ask"><div class="label">ASK</div><p>Do you process credit card transactions at the business?</p></div>
+        <div class="note">⚠ If YES to credit cards → Quote Premium Pricing. If NO → Quote Standard Pricing.</div>
+        <div class="note">⚠ 1 line → go to Phase 3a (Desk Phone) or 3b (Cell Phone). 2+ lines → go to Phase 4 (Multi-Line).</div>
+        <div class="tip"><strong>💡 IF ADDRESS IS WRONG</strong>"What is the correct address for your business so I can update my records and verify if Shared Fiber is available? Is it okay if I call you back later today after I verify which AT&T Services are available at your address? What is the best number to call you back at?"</div>
       </div>
 
-      <!-- P3 -->
-      <div class="page" id="p3">
-        <div class="page-title">WIFI Pricing</div>
-        <div class="page-subtitle">Phase 3a · Unlimited WIFI plan options</div>
-        <div class="script-block say"><div class="label">SAY</div><p>AT&T Fixed Wireless Premium normally runs $105/month and includes 250GB of priority data for your critical business applications.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>But right now, AT&T has reduced the price to as low as $65/month with paperless billing, autopay, and existing AT&T wireless service.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>Option 2 — the Standard service for $65/mo, and you can bring it down to $30 a month with paperless billing, autopay, and existing AT&T wireless service.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>The 5G router — normally $275 — is just $1 on a 3-year term. And shipping is waived.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>So for a few dollars a day, your business gets a fully independent internet connection backed by AT&T's 5G network and the AT&T Business Guarantee.</p></div>
-        <div class="script-block ask"><div class="label">ASK</div><p>Which service best fits your business? Standard or Premium?</p></div>
+      <!-- P3a: 1-LINE DESK PHONE -->
+      <div class="page" id="p3a">
+        <div class="page-title">1-Line: Desk Phone Solution</div>
+        <div class="page-subtitle">Phase 3a · Office@Hand desk phone</div>
+        <div class="script-block say"><div class="label">SAY</div><p>With only 1 number at the business, AT&T has a lot of great options for your business.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>We recommend our Standard Service for $65 a month and with other discounts you can bring it down to as low as $30 a month for internet.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>For the phone service we have 3 options:</p></div>
+
+        <div style="margin:10px 0;padding:14px;background:var(--blue-bg);border-radius:var(--radius);border:1px solid #B8D4F0;">
+          <div style="font-size:13px;font-weight:700;color:var(--blue-dark);margin-bottom:8px;">OPTION 1 — Office@Hand</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.7;">$20/mo per phone number</div>
+        </div>
+
+        <div style="margin:10px 0;padding:14px;background:var(--green-bg);border-radius:var(--radius);border:1px solid #A8E6B0;">
+          <div style="font-size:13px;font-weight:700;color:var(--green-dark);margin-bottom:8px;">OPTION 2 — Get a Cell Phone</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.7;">Get a cell phone and get $20 off Air</div>
+        </div>
+
+        <div style="margin:10px 0;padding:14px;background:var(--purple-bg);border-radius:var(--radius);border:1px solid #C9A4E8;">
+          <div style="font-size:13px;font-weight:700;color:var(--purple);margin-bottom:8px;">OPTION 3 — Get the APP</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.7;">AT&T has partnered with Ring Central. Your business phone will be on the AT&T approved APP. The APP download is free and will only be billed $20/mo for the phone line.</div>
+        </div>
+
+        <div class="script-block ask"><div class="label">ASK</div><p>Do you prefer to have a phone stationed at the business like a desk phone, or would you like to have it mobile with you so you could answer calls whether you are at the business or out of the office?</p></div>
+        <div class="note">⚠ If they want mobile → go to Phase 3b (Cell Phone)</div>
+        <div class="script-block say"><div class="label">SAY</div><p>With 1 Line and Internet with AT&T, I estimate your current bill to be around $150/mo. Does that sound right?</p></div>
+        <div class="note">⚠ If not correct, capture their actual monthly spend.</div>
+
+        <div style="margin:10px 0 6px;padding:10px 14px;background:var(--blue-bg);border-radius:var(--radius);border:1px solid #B8D4F0;font-size:13px;font-weight:700;color:var(--blue-dark);">OPTION 1 — Office@Hand</div>
+
+        <div class="script-block say"><div class="label">SAY</div><p>AT&T Internet with a new Digital Desk Phone provided by AT&T through its partnership with Office@Hand will only cost $75/mo Standard or $115/mo Premium. This faster, more secure Wireless Internet along with digital desk phone saves your business money and enhances your business operations through digital cloud technology.</p></div>
 
         <div style="margin:12px 0;padding:14px;background:var(--blue-bg);border-radius:var(--radius);border:1px solid #B8D4F0;">
-          <div style="font-size:13px;font-weight:700;color:var(--blue-dark);margin-bottom:8px;">PLAN OPTIONS:</div>
+          <div style="font-size:13px;font-weight:700;color:var(--blue-dark);margin-bottom:8px;">1-LINE DESK PHONE PRICING:</div>
           <div style="font-size:13px;color:var(--text);line-height:1.8;">
-            <strong>Option 1 — Premium:</strong> $105/mo → $65/mo with eligible discounts (Unlimited WIFI + priority data)<br>
-            <strong>Option 2 — Standard:</strong> $65/mo → $30/mo with eligible discounts
+            <strong>Standard:</strong> $75/mo (Internet + Desk Phone)<br>
+            <strong>Premium:</strong> $115/mo (Internet + Desk Phone + priority data)
           </div>
         </div>
-
-        <div class="note">⚠ <strong>IF CUSTOMER SAYS "TOO EXPENSIVE"</strong> → offer the Basic package as a last resort:</div>
-        <div class="script-block say"><div class="label">SAY</div><p>We do offer a Basic Wireless Backup for $30/mo. It does not offer priority data and only works when your existing primary circuit goes down but would give you peace of mind for only $1 a day. Can I enroll you in our basic package?</p></div>
-
-        <div style="margin:8px 0;padding:10px 14px;background:var(--orange-bg);border-radius:var(--radius-sm);border-left:3px solid var(--orange);font-size:12px;color:#8B5E00;">
-          <strong>Option 3 — Basic:</strong> $30/mo flat — backup only, no priority data, activates on outage
-        </div>
-
-        <div class="script-block say"><div class="label">SAY</div><p>You will receive a dedicated bill for AT&T Fixed Wireless Internet, billed separately from any other AT&T services.</p></div>
-        <div class="tip"><strong>💡 OBJECTION — "That sounds expensive"</strong>Reframe: "I understand — let me put it this way. One hour of downtime can cost a business thousands in lost revenue and productivity. It's not an expense — it's insurance for your business operations."</div>
       </div>
 
-      <!-- P3b -->
+      <!-- P3b: 1-LINE CELL PHONE -->
       <div class="page" id="p3b">
-        <div class="page-title">Backup Pricing</div>
-        <div class="page-subtitle">Phase 3b · Backup Only plan</div>
-        <div class="script-block say"><div class="label">SAY</div><p>Basic Backup Only is $30/mo. This cost effective, $1 per day package activates automatically if your existing primary circuit experiences an outage.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>The 5G router — normally $275 — is just $1 on a 3-year term. And shipping is waived.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>You will receive a dedicated bill for AT&T Fixed Wireless Internet, billed separately from any other AT&T services.</p></div>
+        <div class="page-title">1-Line: Cell Phone Solution</div>
+        <div class="page-subtitle">Phase 3b · Office@Hand App or New Cell Phone</div>
+        <div class="script-block ask"><div class="label">ASK</div><p>Would you like to have your business line added to your existing cell phone — basically 2 phone numbers on one device — or have a designated separate cell phone for your business?</p></div>
+
+        <div style="margin:12px 0;padding:14px;background:var(--green-bg);border-radius:var(--radius);border:1px solid #A8E6B0;">
+          <div style="font-size:13px;font-weight:700;color:var(--green-dark);margin-bottom:8px;">OPTION 2 — New Cell Phone with Business Number</div>
+        </div>
+        <div class="script-block say"><div class="label">SAY</div><p>With 1 Line and Internet with AT&T, I estimate your current bill to be around $150/mo. Does that sound right?</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>AT&T Internet with the New iPhone 17E Cell phone and Unlimited Talk and Text for the business number will cost $120/mo. Plus you get $20 off Air.</p></div>
+
+        <div style="margin:12px 0;padding:14px;background:var(--purple-bg);border-radius:var(--radius);border:1px solid #C9A4E8;">
+          <div style="font-size:13px;font-weight:700;color:var(--purple);margin-bottom:8px;">OPTION 3 — Get the APP: Existing Cell Phone — 2 Numbers, 1 Phone</div>
+        </div>
+        <div class="script-block say"><div class="label">SAY</div><p>AT&T has partnered with Ring Central. Your business phone will be on the AT&T approved APP. The APP download is free and will only be billed $20/mo for the phone line.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>You will be able to make and receive calls using your existing cell phone while only displaying your business phone number when making calls or sending text. The APP is completely independent from your personal phone number.</p></div>
       </div>
 
+      <!-- P4: MULTI-LINE -->
+      <div class="page" id="p4">
+        <div class="page-title">Multi-Line Solution (2-5 Lines)</div>
+        <div class="page-subtitle">Phase 4 · Office@Hand multi-line pricing</div>
+        <div class="script-block say"><div class="label">SAY</div><p>With <span class="live" id="live_lines">[#]</span> Lines at the business, AT&T has great options for your business.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>With <span class="live" id="live_lines2">[#]</span> Lines and Internet with AT&T, I estimate your current bill to be around <span class="live" id="live_estimate">[SEE CHART]</span>/mo. Does that sound right?</p></div>
+        <div class="note">⚠ If not correct, capture their actual monthly spend.</div>
 
-      <!-- P6 -->
-      <div class="page" id="p6">
-        <div class="page-title">Qualification & Data Collection</div>
-        <div class="page-subtitle">Phase 6 · Confirm details to send the agreement</div>
-        <div class="script-block trans"><div class="label">TRANSITION</div><p>To get the AT&T agreement sent over to you today, I just need to confirm a few quick details about your business.</p></div>
-        <div class="note">⚠ Ask questions in this order: low-friction items first, sensitive items (Tax ID) last. Keep momentum — use a conversational cadence, not an interrogation. Fill in ALL fields on the right panel →</div>
-
-        <table class="q-table">
-          <tr><th style="width:30px">#</th><th>QUESTION</th><th>AGENT NOTES</th></tr>
-          <tr><td class="qnum">1</td><td>Is [ADDRESS] the correct service address where the Fixed Wireless Internet will be used?</td><td class="qnote">Confirm address first — easiest yes</td></tr>
-          <tr><td class="qnum">2</td><td>Can I get the proper spelling of your first and last name?</td><td class="qnote">Build rapport — use their name going forward</td></tr>
-          <tr><td class="qnum">3</td><td>What is the full legal business name?</td><td class="qnote">Must match official records</td></tr>
-          <tr><td class="qnum">4</td><td>What is the main telephone number listed for the business?</td><td class="qnote">Standard — quick answer</td></tr>
-          <tr><td class="qnum">5</td><td>And the best direct number to reach you at?</td><td class="qnote">For follow-up calls</td></tr>
-          <tr><td class="qnum">6</td><td>Do you currently have an AT&T wireless phone, personal or business? If yes, what is that number?</td><td class="qnote">Needed for bundled discount eligibility</td></tr>
-          <tr><td class="qnum">7</td><td>What address do you use for monthly billing statements?</td><td class="qnote">May differ from service address</td></tr>
-          <tr><td class="qnum">8</td><td>What email will you use to receive the AT&T agreement and shipping notifications?</td><td class="qnote">Verify spelling carefully</td></tr>
-          <tr><td class="qnum">9</td><td>What is the best address to ship the equipment to?</td><td class="qnote">Signature required on delivery</td></tr>
-          <tr><td class="qnum">10</td><td>To check for existing AT&T service and establish new service, may I have the Business Tax ID?</td><td class="qnote">Save for last — highest friction point</td></tr>
+        <table class="price-table">
+          <tr><th>Lines</th><th>Est. Current Bill</th><th>Standard</th><th>Premium</th></tr>
+          <tr><td><strong>2</strong></td><td>$200/mo</td><td>$95/mo</td><td>$135/mo</td></tr>
+          <tr><td><strong>3</strong></td><td>$250/mo</td><td>$115/mo</td><td>$155/mo</td></tr>
+          <tr><td><strong>4</strong></td><td>$300/mo</td><td>$135/mo</td><td>$175/mo</td></tr>
+          <tr><td><strong>5</strong></td><td>$350/mo</td><td>$155/mo</td><td>$195/mo</td></tr>
         </table>
 
-        <div class="tip"><strong>💡 TAX ID OBJECTION HANDLER</strong>If they hesitate: "I completely understand the sensitivity. AT&T requires this solely to verify existing wireless accounts and to process the new service agreement. It's a standard business verification step — similar to what you'd provide for any new business utility."</div>
+        <div class="script-block say"><div class="label">SAY</div><p>AT&T Internet with new Digital Desk Phones provided by AT&T through its partnership with Office@Hand will only cost [SEE CHART]/mo. This faster, more secure Wireless Internet along with digital desk phones saves your business money and enhances your business operations through digital cloud technology.</p></div>
+
+        <div class="script-block ask"><div class="label">ASK</div><p>Are any of your numbers a dedicated fax number?</p></div>
+        <div class="tip"><strong>💡 IF YES (FAX)</strong>"With this transition, the need for a physical fax machine is eliminated. All your incoming and outgoing faxes utilize your same existing fax number but are sent directly to your email. You no longer need to worry about your fax machine running out of paper."</div>
+        <div class="note">⚠ Proceed to Phase 5 (Data Collection)</div>
       </div>
 
-      <!-- P7 -->
+      <!-- P5: DATA COLLECTION -->
+      <div class="page" id="p5">
+        <div class="page-title">Closing Transition & Data Collection</div>
+        <div class="page-subtitle">Phase 5 · Capture customer info for enrollment</div>
+        <div class="script-block say"><div class="label">SAY</div><p>Enrollment is quick and easy and is handled in stages to ensure your business stays connected through this transition.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>First, I need to send you the agreement for AT&T Internet Air. This creates a Wireless Account in the business name and enables the new AT&T Internet modem to be shipped directly to the business.</p></div>
+        <div class="script-block ask"><div class="label">ASK</div><p>What is the best email to send the Internet Agreement to?</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Okay, I need to take a moment to verify a few other pieces of information on your account:</p></div>
+        <div class="script-block ask"><div class="label">ASK</div><p>Your Legal Business Name is <span class="live" id="live_bizname">[BUSINESS NAME]</span>, correct?</p></div>
+        <div class="script-block ask"><div class="label">ASK</div><p>Please spell your First and Last Name for me?</p></div>
+        <div class="script-block ask"><div class="label">ASK</div><p>What is the best number to reach you at?</p></div>
+        <div class="script-block ask"><div class="label">ASK</div><p>To expedite the establishment of the new wireless internet account, what is your business tax id?</p></div>
+        <div class="note">⚠ Fill in ALL fields on the right panel → then proceed to Phase 6a (Office@Hand) or 6b (New Cell)</div>
+      </div>
+
+      <!-- P6a: NEXT STEPS - OFFICE@HAND -->
+      <div class="page" id="p6a">
+        <div class="page-title">Next Steps: Office@Hand</div>
+        <div class="page-subtitle">Phase 6a · For Desk Phone or App solutions</div>
+        <div class="script-block say"><div class="label">SAY</div><p>Great! Once you accept your new AT&T Business Agreement and the modem ships, you will begin receiving emails from our Office@Hand team for your phone line. The emails will go to <span class="live" id="live_email_6a">[EMAIL]</span>.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>The first email will be the Office@Hand agreement you will need to electronically sign. Once signed you receive an email with a few questions regarding programming your new digital phone.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>The Office@Hand team will reach out to you at <span class="live" id="live_phone_6a">[PHONE]</span>. Will this be the best number for them to reach you at?</p></div>
+        <div class="note">⚠ If no, capture the DM's best can-be-reached phone number.</div>
+        <div class="script-block say"><div class="label">SAY</div><p>I understand that sounds like a lot, but I like to be thorough to ensure a smooth transition for my clients.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>I appreciate your time; we are just about finished. I simply need to go over the required regulatory compliance statement.</p></div>
+        <div class="note">⚠ Proceed to Phase 7 (Compliance)</div>
+      </div>
+
+      <!-- P6b: NEXT STEPS - NEW CELL PHONE -->
+      <div class="page" id="p6b">
+        <div class="page-title">Next Steps: New Cell Phone</div>
+        <div class="page-subtitle">Phase 6b · For new cell phone with business number</div>
+        <div class="script-block say"><div class="label">SAY</div><p>Great! Once you accept your new AT&T Business Agreement, we will be able to ship the modem and cell phone to your business. The cell phone will be pre-programmed with a dummy number for shipping purposes.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Once you have received and activated the cell phone, you contact me or AT&T to complete the porting of your business number to the cell phone. This is done to minimize downtime to your business number and ensure your business line is ported to the cell phone when it is most convenient for you.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>I understand that sounds like a lot, but I like to be thorough to ensure a smooth transition for my clients.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>I appreciate your time; we are just about finished. I simply need to go over the required regulatory compliance statement.</p></div>
+        <div class="note">⚠ Proceed to Phase 7 (Compliance)</div>
+      </div>
+
+      <!-- P7: COMPLIANCE -->
       <div class="page" id="p7">
-        <div class="page-title">Compliance & Close</div>
+        <div class="page-title">Regulatory Compliance</div>
         <div class="page-subtitle">Phase 7 · Required disclosure — read clearly</div>
-        <div class="note">⚠ This section is required for regulatory compliance. Read it clearly and at a moderate pace. Do not rush through it.</div>
-        <div class="script-block say"><div class="label">SAY</div><p>I appreciate your time — we're almost done. AT&T must disclose certain information and obtain your consent.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>The AT&T Wireless Agreement is being emailed to <span class="live" id="live_email">[EMAIL ADDRESS]</span>. Upon acceptance, you agree to activate Fixed Wireless Premium at the premium rate of $105/month. You can retain premium with paperless billing and autopay for discounts at $65/month, or switch to basic for as low as $30/month.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>The agreement covers standard AT&T wireless policy and does not contain pricing.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>Billing begins upon shipment, renews monthly. Cancel anytime. 3-year term.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>We ask that you not confuse your AT&T Fixed Wireless bill with other AT&T services you may have. Fixed Wireless is billed separately and requires its own payment. This is why we highly encourage you to set up AUTOPAY.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>To set up AUTOPAY, you simply need to visit business.att.com and click "Account Sign In" in the top right corner. Then set up your username and password one-time, add your billing information for AUTOPAY and that's it.</p></div>
-        <div class="script-block ask"><div class="label">ASK</div><p>Will you have any trouble accepting the agreement today?</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>Ok so I was asking because I can only send the agreement if you are sure you want it. My performance is based on you accepting this agreement; if not I can send you an informative brochure and I can call you back after you read it.</p></div>
-        <div class="note">⚠ Wait for confirmation. If they have concerns, address them. Do not proceed until you have verbal consent.</div>
+        <div class="note">⚠ AT&T must comply with regulatory and legal requirements. Read this clearly.</div>
+        <div class="script-block say"><div class="label">SAY</div><p>AT&T must comply with regulatory and legal requirements to disclose certain information to customers and gain their consent before purchase.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>In recap, your monthly charge for AT&T Internet Air for Business and <span class="live" id="live_lines_7">[#]</span> line(s) is <span class="live" id="live_price_7">[PRICE]</span>/mo. The Wireless terms and conditions are being emailed to <span class="live" id="live_email_7">[EMAIL]</span>. You will need to accept the wireless terms before we can ship your equipment.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Services will be renewed each month, and you can cancel any time by calling us. AT&T Internet Air and Wireless Service is a 3-year Term of Service which includes a 30-Day Risk Free trial. If you disconnect the service within 30 Days of the activation date, AT&T will issue a refund for all AT&T service charges, taxes and fees.</p></div>
+
+        <div style="margin:12px 0;padding:14px;background:var(--orange-bg);border-radius:var(--radius);border:1px solid var(--orange);">
+          <div style="font-size:12px;font-weight:700;color:#8B5E00;margin-bottom:6px;">COMPLIANCE PART 2 — Choose one:</div>
+        </div>
+
+        <div class="tip"><strong>💡 IF OFFICE@HAND SOLUTION</strong>Once your Internet Modem ships, the Office@Hand agreement will be emailed to <span class="live" id="live_email_7b">[EMAIL]</span>. You will need to accept the Office@Hand agreement before any programming of your phone service or equipment can begin. Accepting these agreements in a timely manner is critical to ensuring proper provisioning. AT&T Internet AIR and Office@Hand are billed separately. Monthly statements will be emailed. Once you receive your first statements you have the option to enroll in Autopay for additional discounts on your service.</div>
+        <div class="tip"><strong>💡 IF NEW CELL PHONE SOLUTION</strong>Once you receive and activate your new cell phone, you will need to contact myself at 325-309-2608 or AT&T's Porting Department at 888-898-7685 to complete the porting of your business line to your new cell phone.</div>
       </div>
 
-      <!-- P8 -->
+      <!-- P8: CLOSE -->
       <div class="page" id="p8">
-        <div class="page-title">Next Steps</div>
-        <div class="page-subtitle">Phase 8 · Confirmation & wrap-up</div>
-        <div class="script-block say"><div class="label">SAY</div><p>Excellent. Here's what happens next:</p></div>
-        <div class="check-list">
-          <div class="check-item"><span>✓</span> Email from AT&T eSign: "AT&T; Contract Ready for Your eSignature."</div>
-          <div class="check-item"><span>✓</span> Follow the link to accept and confirm.</div>
-          <div class="check-item"><span>✓</span> 5G router ships pre-programmed — self-install included.</div>
-          <div class="check-item"><span>✓</span> Signature required on delivery.</div>
-        </div>
-        <div class="script-block say"><div class="label">SAY</div><p>Please note that if you have fiber we encourage you use this as a backup.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>We'll follow up to ensure you received the email. Thank you for choosing AT&T!</p></div>
-      </div>
+        <div class="page-title">Closing</div>
+        <div class="page-subtitle">Phase 8 · Agreement acceptance & wrap-up</div>
+        <div class="script-block ask"><div class="label">ASK</div><p>Will you have any problems accepting the internet agreement today?</p></div>
 
-      <!-- P9 -->
-      <div class="page" id="p9">
-        <div class="page-title">Quick Reference — Common Objections</div>
-        <div class="page-subtitle">Phase 9 · Use these responses when prospects push back</div>
+        <div class="tip"><strong>💡 IF NO (THEY WILL ACCEPT)</strong></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Finally, my supervisor may call you to ensure you have received the email, answer any questions you have and make sure I have provided excellent customer service to you today. Is <span class="live" id="live_phone_8">[PHONE]</span> the best number for the supervisor to call?</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Thank you for your time today, it was a pleasure speaking with you. Please remember to watch your email for the Internet Agreement. You should see that within 24 hours.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Thank you again for choosing AT&T. Have a nice day. Goodbye!</p></div>
 
-        <table class="q-table">
-          <tr><th style="width:180px">OBJECTION</th><th>RECOMMENDED RESPONSE</th></tr>
-          <tr><td style="font-weight:600;">"We're happy with our current provider"</td><td>"This isn't about replacing your provider — it's about protecting your business when your provider has a problem. Think of it as business continuity insurance for about $4 a day."</td></tr>
-          <tr><td style="font-weight:600;">"Send me information via email"</td><td>"I'd be happy to. What I'm sharing with you now is actually everything that would be in the email. Since I have you on the line, let me save you time — do you have any questions I can answer right now?"</td></tr>
-          <tr><td style="font-weight:600;">"I don't have time right now"</td><td>"I completely understand. This will only take about 3 more minutes. If now truly isn't a good time, what's the best time and number to reach you tomorrow?"</td></tr>
-          <tr><td style="font-weight:600;">"We don't need backup internet"</td><td>"Most businesses feel that way until an outage happens. Studies show the average small business loses over $10,000 per hour of downtime. For about $4 a day, this service ensures that never impacts your operations."</td></tr>
-          <tr><td style="font-weight:600;">"I need to check with my partner"</td><td>"Of course. Would it help if we set up a brief call with both of you? I can walk through the details in under 5 minutes. When would work for both of you?"</td></tr>
-          <tr><td style="font-weight:600;">"The 3-year commitment is too long"</td><td>"That's fair. The 3-year term is what makes the $1 router possible — without it, the equipment alone costs $275. And remember, you can cancel anytime by calling AT&T. As a last resort, keep in mind AT&T also offers a 30-day risk-free trial — if you disconnect within 30 days, you get a full refund of all service charges, taxes, and fees."</td></tr>
-          <tr><td style="font-weight:600;">"I need to think about it"</td><td>"Absolutely, I respect that. Just so you know, the $1 router promotion and waived shipping are current limited-time offers. What specific concern would you want to think through? Maybe I can help clarify right now."</td></tr>
-          <tr><td style="font-weight:600;">"We already have a backup"</td><td>"That's smart — what are you using currently? [Listen] One advantage of AT&T Fixed Wireless is that it runs on a completely separate 5G network, so it's not dependent on the same infrastructure as your primary or existing backup."</td></tr>
-        </table>
-
-        <div style="margin-top:20px;padding:16px;background:var(--blue-bg);border-radius:var(--radius);border:1px solid #B8D4F0;">
-          <div style="font-size:14px;font-weight:700;color:var(--blue-dark);margin-bottom:10px;">KEY PRODUCT FACTS — AT A GLANCE</div>
-          <div style="font-size:13px;color:var(--text);line-height:1.7;">
-            <strong>Service:</strong> AT&T Fixed Wireless Internet (5G)<br>
-            <strong>Speeds:</strong> 300–474 Mbps average download (varies by location/device)<br>
-            <strong>Premium Price:</strong> $105/mo (includes 250GB priority data) → $65/mo with discounts<br>
-            <strong>Standard Price:</strong> $65/mo → $30/mo with paperless billing + autopay + AT&T wireless<br>
-            <strong>Basic Price:</strong> $30/mo — no discounts, backup only<br>
-            <strong>Router:</strong> $1 on 3-year term (normally $275) — shipping waived<br>
-            <strong>Daily Cost:</strong> ~$4/day (Premium at $105/mo)<br>
-            <strong>Installation:</strong> Self-install, pre-programmed equipment, signature required on delivery
-          </div>
-        </div>
+        <div class="tip"><strong>💡 IF YES (NEEDS TIME)</strong>"That's okay. The agreement will be sent within the next 24 hours. Please feel free to review and click accept upon review. When will be the best time to follow up with you? Thank you for your time today. Thank you again for choosing AT&T. Have a nice day. Goodbye!"</div>
       </div>
 
     </form>
@@ -357,11 +326,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
     </div>
   </div>
 
-  <!-- RIGHT PANEL: FORM (ALWAYS VISIBLE) -->
+  <!-- RIGHT PANEL: FORM -->
   <div class="form-panel">
     <div class="form-panel-header">📋 Customer Data — Fill ALL Fields</div>
     <div class="form-panel-body">
-
       <div class="form-mandatory">⚠ ALL fields with * are REQUIRED. Do not submit with missing information.</div>
 
       <div class="form-section-label">Business Info</div>
@@ -373,86 +341,63 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="field"><label>Legal Business Name <span class="req">*</span></label><input type="text" name="legal_business_name" form="mainForm" required placeholder="Must match records"></div>
 
       <div class="form-divider"></div>
-      <div class="form-section-label">Contact</div>
+      <div class="form-section-label">Account Details</div>
       <div class="field-row">
-        <div class="field"><label>What is the main number listed for your business? <span class="req">*</span></label><input type="tel" name="main_phone" form="mainForm" required placeholder="(555) 555-5555"></div>
-        <div class="field"><label>Best Direct # <span class="req">*</span></label><input type="tel" name="best_phone" form="mainForm" required placeholder="DM #"></div>
+        <div class="field"><label># of Lines <span class="req">*</span></label><input type="number" name="num_lines" form="mainForm" required min="1" max="10" placeholder="1"></div>
+        <div class="field"><label>Credit Card Processing? <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="cc_processing" id="cc_y" value="Yes" form="mainForm" required><label for="cc_y">Yes</label></div><div class="pill"><input type="radio" name="cc_processing" id="cc_n" value="No" form="mainForm"><label for="cc_n">No</label></div></div></div>
       </div>
-      <div class="field"><label>AT&T Wireless Phone <span class="hint">(for discount)</span></label><input type="tel" name="att_wireless_phone" form="mainForm" placeholder="Blank if none"></div>
+      <div class="field"><label>Solution Type <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="solution_type" id="sol_desk" value="Desk Phone" form="mainForm" required><label for="sol_desk">Desk</label></div><div class="pill"><input type="radio" name="solution_type" id="sol_app" value="Cell App" form="mainForm"><label for="sol_app">App</label></div><div class="pill"><input type="radio" name="solution_type" id="sol_cell" value="New Cell" form="mainForm"><label for="sol_cell">Cell</label></div><div class="pill"><input type="radio" name="solution_type" id="sol_multi" value="Multi-Line" form="mainForm"><label for="sol_multi">Multi</label></div></div></div>
+      <div class="field"><label>Plan <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="plan" id="pp" value="Premium" form="mainForm" required><label for="pp">Premium</label></div><div class="pill"><input type="radio" name="plan" id="ps" value="Standard" form="mainForm"><label for="ps">Standard</label></div></div></div>
+      <div class="field"><label>Current Monthly Spend <span class="hint">(estimated)</span></label><input type="text" name="current_spend" form="mainForm" placeholder="$150/mo"></div>
+      <div class="field"><label>Has Fax Line? <span class="hint">(if multi-line)</span></label><div class="pills"><div class="pill"><input type="radio" name="has_fax" id="fax_y" value="Yes" form="mainForm"><label for="fax_y">Yes</label></div><div class="pill"><input type="radio" name="has_fax" id="fax_n" value="No" form="mainForm"><label for="fax_n">No</label></div></div></div>
+
+      <div class="form-divider"></div>
+      <div class="form-section-label">Contact</div>
+      <div class="field"><label>Best Phone # <span class="req">*</span></label><input type="tel" name="best_phone" form="mainForm" required placeholder="(555) 555-5555"></div>
+      <div class="field"><label>What is the main number listed for your business? <span class="req">*</span></label><input type="tel" name="main_phone" form="mainForm" required placeholder="(555) 555-5555"></div>
       <div class="field"><label>Email for Agreement <span class="req">*</span></label><input type="email" name="dm_email" form="mainForm" required placeholder="email@business.com"></div>
 
       <div class="form-divider"></div>
       <div class="form-section-label">Billing & Tax</div>
-      <div class="field"><label>Billing Address <span class="hint">(if different)</span></label><input type="text" name="billing_address" form="mainForm" placeholder="Same as service if blank"></div>
       <div class="field"><label>Business Tax ID <span class="req">*</span></label><input type="text" name="tax_id" form="mainForm" required placeholder="Tax ID or 'Pending'"></div>
-      <div class="tip" style="font-size:11px;padding:8px 10px;margin-bottom:10px;"><strong>💡 TAX ID HESITATION</strong>"AT&T requires this solely to verify existing accounts. Standard business verification — same as any utility."</div>
+      <div class="field"><label>BTN/BAN <span class="req">*</span></label><input type="text" name="btn_ban" form="mainForm" required placeholder="BTN/BAN"></div>
 
       <div class="form-divider"></div>
-      <div class="form-section-label">Shipping</div>
-      <div class="field-row">
-        <div class="field"><label>Carrier <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="shipping_carrier" id="cf" value="FEDEX" form="mainForm" required><label for="cf">FedEx</label></div><div class="pill"><input type="radio" name="shipping_carrier" id="cu" value="UPS" form="mainForm"><label for="cu">UPS</label></div></div></div>
-        <div class="field"><label>To service addr? <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="ship_to_service" id="sy" value="Yes" form="mainForm" required><label for="sy">Yes</label></div><div class="pill"><input type="radio" name="ship_to_service" id="sn" value="No" form="mainForm"><label for="sn">No</label></div></div></div>
-      </div>
-      <div class="conditional" id="altShip"><div class="field"><label>Alt Address <span class="req">*</span></label><input type="text" name="alt_shipping_address" form="mainForm" placeholder="Shipping address"></div></div>
+      <div class="form-section-label">Agent</div>
+      <div class="field"><label>Agent Name <span class="req">*</span></label><input type="text" name="agent_name" form="mainForm" required placeholder="Your name"></div>
+      <div class="field"><label>Notes</label><textarea name="notes" form="mainForm" rows="2" placeholder="Additional notes..."></textarea></div>
 
       <div class="form-divider"></div>
-      <div class="form-section-label">Agent Tracking</div>
-      <div class="field-row">
-        <div class="field"><label>Use Case <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="use_case" id="ub" value="A backup" form="mainForm" required><label for="ub">Backup</label></div><div class="pill"><input type="radio" name="use_case" id="um" value="Main connection" form="mainForm"><label for="um">Main</label></div></div></div>
-        <div class="field"><label>Plan <span class="req">*</span></label><div class="pills"><div class="pill"><input type="radio" name="plan" id="pp" value="Premium" form="mainForm" required><label for="pp">Premium</label></div><div class="pill"><input type="radio" name="plan" id="ps" value="Standard" form="mainForm"><label for="ps">Standard</label></div><div class="pill"><input type="radio" name="plan" id="pb" value="Basic" form="mainForm"><label for="pb">Basic</label></div></div></div>
-      </div>
-      <div class="conditional" id="mainNotes" style="margin-bottom:10px;"><div class="field"><label>Main connection notes</label><input type="text" name="notes" form="mainForm" placeholder="Phone lines, details..."></div></div>
-      <div class="field-row">
-        <div class="field"><label>BTN/BAN <span class="req">*</span></label><input type="text" name="btn_ban" form="mainForm" required placeholder="BTN/BAN"></div>
-        <div class="field"><label>Agent Name <span class="req">*</span></label><input type="text" name="agent_name" form="mainForm" required placeholder="Your name"></div>
-      </div>
-
-      <div class="form-divider"></div>
-      <div class="billing-bar"><strong>⚠</strong> AT&T Fixed Wireless is billed separately. Confirm customer is aware.</div>
+      <div class="billing-bar"><strong>⚠</strong> Internet Air & Office@Hand are billed separately. Confirm customer is aware.</div>
       <button type="submit" form="mainForm" class="btn-submit" id="submitBtn">Submit to Google Sheets</button>
-      <div style="text-align:center;"><button type="button" class="btn-clear" onclick="if(confirm('Clear all fields?')){document.getElementById('mainForm').reset();document.getElementById('altShip').classList.remove('show');document.getElementById('mainNotes').classList.remove('show');go('p1',document.querySelector('.nav-btn'));updateLive('live_address','','[ADDRESS]');updateLive('live_email','','[EMAIL ADDRESS]');updateLive('live_bizname','','[BUSINESS NAME]');}">Clear Form</button></div>
+      <div style="text-align:center;"><button type="button" class="btn-clear" onclick="if(confirm('Clear all fields?')){document.getElementById('mainForm').reset();go('p1',document.querySelector('.nav-btn'));}">Clear Form</button></div>
     </div>
   </div>
-
 </div>
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav">
   <button class="active" onclick="goM('p1',this)">1</button>
   <button onclick="goM('p2',this)">2</button>
-  <button onclick="goM('p3',this)">3a</button>
+  <button onclick="goM('p3a',this)">3a</button>
   <button onclick="goM('p3b',this)">3b</button>
-  <button onclick="goM('p6',this)" style="background:var(--orange-bg);color:#B35C00;">6 ✏️</button>
+  <button onclick="goM('p4',this)">4</button>
+  <button onclick="goM('p5',this)" style="background:var(--orange-bg);color:#B35C00;">5 ✏️</button>
+  <button onclick="goM('p6a',this)">6a</button>
+  <button onclick="goM('p6b',this)">6b</button>
   <button onclick="goM('p7',this)">7</button>
   <button onclick="goM('p8',this)">8</button>
-  <button onclick="goM('p9',this)">9</button>
 </div>
 
 <script>
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycby2LjcVTNOMTc3oz3yoqj_4AUUQzcs9JpBQrYZGKbgDSicOQxKkk7CMTbmCadmdj-3jJA/exec';
 
-function go(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  document.getElementById('mainArea').scrollTop=0;
-}
-function goM(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.mobile-nav button').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  document.getElementById('mainArea').scrollTop=0;
-}
-
-document.querySelectorAll('input[name="ship_to_service"]').forEach(r=>{r.addEventListener('change',function(){document.getElementById('altShip').classList.toggle('show',this.value==='No');});});
-document.querySelectorAll('input[name="use_case"]').forEach(r=>{r.addEventListener('change',function(){document.getElementById('mainNotes').classList.toggle('show',this.value==='Main connection');if(this.value!=='Main connection'){const n=document.querySelector('input[name="notes"]');if(n)n.value='';}});});
+function go(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('mainArea').scrollTop=0;}
+function goM(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.mobile-nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('mainArea').scrollTop=0;}
 
 document.getElementById('mainForm').addEventListener('submit',async function(e){
   e.preventDefault();const btn=document.getElementById('submitBtn'),err=document.getElementById('errorBanner');
   let valid=true;
-  // Check all required fields including those in form panel with form="mainForm"
   document.querySelectorAll('[form="mainForm"][required], #mainForm [required]').forEach(f=>{
     if(f.type==='radio'){if(!document.querySelector(`[form="mainForm"][name="${f.name}"]:checked, #mainForm [name="${f.name}"]:checked`))valid=false;}
     else if(!f.value.trim()){valid=false;f.style.borderColor='#FFD4D4';f.addEventListener('input',()=>f.style.borderColor='',{once:true});}
@@ -460,7 +405,6 @@ document.getElementById('mainForm').addEventListener('submit',async function(e){
   if(!valid){err.classList.add('show');return;}
   err.classList.remove('show');btn.disabled=true;btn.textContent='Submitting...';
   const fd=new FormData(this);
-  // Also grab fields from form panel (form="mainForm" attribute)
   document.querySelectorAll('[form="mainForm"]').forEach(f=>{
     if(f.type==='radio'){if(f.checked)fd.set(f.name,f.value);}
     else if(f.name && f.value)fd.set(f.name,f.value);
@@ -480,15 +424,23 @@ function resetForm(){
   const f=document.getElementById('mainForm');f.style.display='block';f.reset();
   document.querySelector('.form-panel-body').style.display='block';
   document.getElementById('successMsg').classList.remove('show');
-  document.getElementById('altShip').classList.remove('show');
-  document.getElementById('mainNotes').classList.remove('show');
-  updateLive('live_address','','[ADDRESS]');updateLive('live_email','','[EMAIL ADDRESS]');updateLive('live_bizname','','[BUSINESS NAME]');
   go('p1',document.querySelector('.nav-btn'));
 }
 
 function updateLive(id,v,fb){const el=document.getElementById(id);if(!el)return;if(v&&v.trim()){el.textContent=v.trim();el.classList.add('filled');el.classList.remove('empty');}else{el.textContent=fb;el.classList.remove('filled');el.classList.add('empty');}}
-const lb={'service_address':{id:'live_address',fallback:'[ADDRESS]'},'dm_email':{id:'live_email',fallback:'[EMAIL ADDRESS]'},'legal_business_name':{id:'live_bizname',fallback:'[BUSINESS NAME]'}};
-document.querySelectorAll('input,textarea,select').forEach(f=>{const b=lb[f.name];if(b)f.addEventListener('input',function(){updateLive(b.id,this.value,b.fallback);});});
+
+const lb={
+  'service_address':{ids:['live_address'],fallback:'[ADDRESS]'},
+  'dm_email':{ids:['live_email_6a','live_email_7','live_email_7b'],fallback:'[EMAIL]'},
+  'legal_business_name':{ids:['live_bizname'],fallback:'[BUSINESS NAME]'},
+  'first_name':{ids:['live_dm'],fallback:'[DM NAME]'},
+  'best_phone':{ids:['live_phone_6a','live_phone_8'],fallback:'[PHONE]'},
+  'num_lines':{ids:['live_lines','live_lines2','live_lines_7'],fallback:'[#]'}
+};
+document.querySelectorAll('input,textarea,select').forEach(f=>{
+  const b=lb[f.name];
+  if(b)f.addEventListener('input',function(){b.ids.forEach(id=>updateLive(id,this.value,b.fallback));});
+});
 </script>
 </body>
 </html>
