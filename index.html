@@ -661,6 +661,85 @@ document.querySelectorAll('[name="has_fax_multi"]').forEach(function(r){
 
 // Run on load
 masterUpdate();
+
+// ── VICIDIAL AUTO-FILL ──
+// Reads URL parameters from VICIdial WEB FORM button and fills the form
+function vicidialAutoFill(){
+  var params=new URLSearchParams(window.location.search);
+  if(params.toString().length===0)return; // no params, skip
+
+  var filled=0;
+  var fieldMap={
+    'first_name':'first_name',
+    'last_name':'last_name',
+    'phone_number':'best_phone',
+    'phone':'best_phone',
+    'address1':'service_address',
+    'email':'dm_email',
+    'comments':'notes',
+    'vendor_id':'btn_ban',
+    'alt_phone':'main_phone'
+  };
+
+  // Build full address from parts if available
+  var addr1=params.get('address1')||'';
+  var city=params.get('city')||'';
+  var state=params.get('state')||'';
+  var zip=params.get('postal_code')||params.get('zip')||'';
+  if(addr1){
+    var fullAddr=addr1;
+    if(city)fullAddr+=', '+city;
+    if(state)fullAddr+=', '+state;
+    if(zip)fullAddr+=' '+zip;
+    var addrField=document.querySelector('[name="service_address"]');
+    if(addrField&&!addrField.value){addrField.value=fullAddr;filled++;}
+  }
+
+  // Fill mapped fields
+  Object.keys(fieldMap).forEach(function(urlKey){
+    var val=params.get(urlKey);
+    if(!val||val==='')return;
+    var formField=document.querySelector('[name="'+fieldMap[urlKey]+'"]');
+    if(formField&&!formField.value){formField.value=val;filled++;}
+  });
+
+  // Try to fill business name from comments or address3
+  var bizName=params.get('comments')||params.get('address3')||'';
+  if(bizName){
+    var bizField=document.querySelector('[name="legal_business_name"]');
+    if(bizField&&!bizField.value){bizField.value=bizName;filled++;}
+  }
+
+  // If main_phone is empty, copy from best_phone
+  var mainField=document.querySelector('[name="main_phone"]');
+  var bestField=document.querySelector('[name="best_phone"]');
+  if(mainField&&!mainField.value&&bestField&&bestField.value){
+    mainField.value=bestField.value;filled++;
+  }
+
+  // Trigger all live updates
+  if(filled>0){
+    document.querySelectorAll('input,textarea,select').forEach(function(el){
+      el.dispatchEvent(new Event('input',{bubbles:true}));
+    });
+    masterUpdate();
+
+    // Show confirmation banner
+    var banner=document.createElement('div');
+    banner.style.cssText='position:fixed;top:0;left:210px;right:320px;z-index:999;background:#34C759;color:#fff;padding:10px 16px;font-family:inherit;font-size:13px;font-weight:600;text-align:center;animation:fadeOut 4s forwards;';
+    banner.textContent='✅ VICIdial data loaded — '+filled+' fields auto-filled. Verify and update if needed.';
+    document.body.appendChild(banner);
+    setTimeout(function(){banner.remove();},4000);
+  }
+}
+
+// Add CSS animation for banner
+var fadeStyle=document.createElement('style');
+fadeStyle.textContent='@keyframes fadeOut{0%,70%{opacity:1;}100%{opacity:0;}}';
+document.head.appendChild(fadeStyle);
+
+// Run auto-fill on page load
+vicidialAutoFill();
 </script>
 </body>
 </html>
