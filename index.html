@@ -159,7 +159,14 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         <div class="tip"><strong>💡 IF YES</strong></div>
         <div class="script-block ask"><div class="label">ASK</div><p>Okay, how many phone numbers are you still using at the business?</p></div>
         <div class="script-block ask"><div class="label">ASK</div><p>Do you process credit card transactions at the business?</p></div>
-        <div class="note">⚠ If YES to credit cards → Quote Premium Pricing. If NO → Quote Standard Pricing.</div>
+        <div style="margin:8px 0;padding:12px 14px;background:#FFF0F0;border:2px solid #FF3B30;border-radius:8px;">
+          <div style="font-size:12px;font-weight:700;color:#FF3B30;margin-bottom:4px;">🚨 AGENT: SELECT THIS NOW IN THE FORM PANEL ➡</div>
+          <div style="font-size:11px;color:#1D1D1F;line-height:1.5;">Select <strong>"Credit Card Processing? Yes/No"</strong> on the right panel. This automatically sets the correct pricing for the entire script. You MUST do this before moving forward.</div>
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <div style="flex:1;padding:8px;background:var(--orange-bg);border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:#8B5E00;">YES = Premium $105/mo</div>
+            <div style="flex:1;padding:8px;background:var(--blue-bg);border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--blue-dark);">NO = Standard $65/mo</div>
+          </div>
+        </div>
         <div class="note">⚠ 1 line → go to Phase 3a (Desk Phone) or 3b (Cell Phone). 2+ lines → go to Phase 4 (Multi-Line).</div>
         <div class="tip"><strong>💡 IF ADDRESS IS WRONG</strong>"What is the correct address for your business so I can update my records and verify if Shared Fiber is available? Is it okay if I call you back later today after I verify which AT&T Services are available at your address? What is the best number to call you back at?"</div>
       </div>
@@ -168,8 +175,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="page" id="p3a">
         <div class="page-title">1-Line: Desk Phone Solution</div>
         <div class="page-subtitle">Phase 3a · Office@Hand desk phone</div>
+        <div id="ccWarning" style="padding:10px 14px;background:#FFF0F0;border:2px solid #FF3B30;border-radius:8px;margin-bottom:10px;font-size:12px;font-weight:600;color:#FF3B30;">🚨 You haven't selected Credit Card Processing yet! Go back to Phase 2 or select it in the form panel ➡ before quoting pricing.</div>
         <div class="script-block say"><div class="label">SAY</div><p>With only 1 number at the business, AT&T has a lot of great options for your business.</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p>We recommend our <span class="live-plan" style="background:var(--blue-bg);padding:2px 8px;border-radius:4px;font-weight:700;color:var(--blue-dark);">Standard — $65/mo</span> Internet Service.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>We recommend our <span class="live-plan" style="background:var(--orange-bg);padding:2px 8px;border-radius:4px;font-weight:700;color:#8B5E00;">Standard or Premium</span> Internet Service.</p></div>
         <div class="script-block say"><div class="label">SAY</div><p>For the phone service we have 3 options: Office@Hand, a Cell Phone, or an App.</p></div>
 
         <div class="script-block ask"><div class="label">ASK</div><p>Do you prefer to have a phone stationed at the business like a desk phone, or would you like to have it mobile with you so you could answer calls whether you are at the business or out of the office?</p></div>
@@ -467,12 +475,16 @@ function updatePricing(){
   // Update all plan labels in script
   var planSpans=document.querySelectorAll('.live-plan');
   planSpans.forEach(function(s){
-    if(isPremium){
-      s.textContent='Premium — $105/mo';
+    if(!cc){
+      s.textContent='Standard or Premium';
+      s.style.background='var(--orange-bg)';
+      s.style.color='#8B5E00';
+    }else if(isPremium){
+      s.textContent='Premium';
       s.style.background='var(--orange-bg)';
       s.style.color='#8B5E00';
     }else{
-      s.textContent='Standard — $65/mo';
+      s.textContent='Standard';
       s.style.background='var(--blue-bg)';
       s.style.color='var(--blue-dark)';
     }
@@ -481,7 +493,11 @@ function updatePricing(){
   // Update all bundle prices in script
   var bundleSpans=document.querySelectorAll('.live-bundle');
   bundleSpans.forEach(function(s){
-    if(isPremium){
+    if(!cc){
+      s.textContent='$75 Standard / $115 Premium';
+      s.style.background='var(--orange-bg)';
+      s.style.color='#8B5E00';
+    }else if(isPremium){
       s.textContent='$115/mo';
       s.style.background='var(--orange-bg)';
       s.style.color='#8B5E00';
@@ -491,10 +507,18 @@ function updatePricing(){
       s.style.color='var(--blue-dark)';
     }
   });
+
+  // Hide/show CC warning in Phase 3a
+  var ccWarn=document.getElementById('ccWarning');
+  if(ccWarn){ccWarn.style.display=isPremium!==undefined?'none':'block';}
 }
 
 document.querySelectorAll('[name="cc_processing"]').forEach(function(r){
-  r.addEventListener('change',updatePricing);
+  r.addEventListener('change',function(){
+    updatePricing();
+    var ccWarn=document.getElementById('ccWarning');
+    if(ccWarn)ccWarn.style.display='none';
+  });
 });
 // ── MULTI-LINE FIELDS TOGGLE ──
 function updateLineFields(){
