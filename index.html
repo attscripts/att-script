@@ -245,19 +245,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         <div class="script-block ask"><div class="label">ASK</div><p>What is the best number to reach you at?</p></div>
         <div class="script-block ask"><div class="label">ASK</div><p>What is the Main Number listed for your business?</p></div>
 
-        <div style="margin:10px 0;padding:14px;background:var(--purple-bg);border-radius:var(--radius);border:1px solid #C9A4E8;">
-          <div style="font-size:13px;font-weight:700;color:var(--purple);margin-bottom:6px;">📞 If Customer Has 2 or More Lines:</div>
+        <div id="multiLineScript" style="display:none;margin:10px 0;padding:14px;background:var(--purple-bg);border-radius:var(--radius);border:1px solid #C9A4E8;">
+          <div style="font-size:13px;font-weight:700;color:var(--purple);margin-bottom:6px;">📞 Customer Has <span class="live-linecount">2</span> Lines:</div>
           <div class="script-block ask" style="margin-bottom:6px;"><div class="label">ASK</div><p>Are any of your numbers a dedicated fax number?</p></div>
           <div class="tip" style="margin-bottom:6px;"><strong>💡 IF YES</strong> Capture the fax number. "With this transition, the need for a physical fax machine is eliminated. All your faxes will be sent directly to your email using your same fax number."</div>
-          <div style="font-size:12px;font-weight:600;color:var(--purple);margin-bottom:4px;">Capture ALL remaining line numbers:</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;">
-            <div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);"><strong>Line 1 (Main):</strong> captured above</div>
-            <div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);"><strong>Line 2:</strong> _______________</div>
-            <div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);"><strong>Line 3:</strong> _______________</div>
-            <div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);"><strong>Line 4:</strong> _______________</div>
-            <div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);"><strong>Line 5:</strong> _______________</div>
-            <div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);"><strong>Fax:</strong> _______________</div>
-          </div>
+          <div style="font-size:12px;font-weight:600;color:var(--purple);margin-bottom:4px;">Capture the remaining number(s):</div>
+          <div id="scriptLineGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;"></div>
         </div>
         <div class="script-block ask"><div class="label">ASK</div><p>To expedite the establishment of the new wireless internet account, what is your business tax id?</p></div>
         <div class="note">⚠ Fill in ALL fields on the right panel → then proceed to Phase 6a (Office@Hand) or 6b (New Cell)</div>
@@ -608,6 +601,20 @@ function masterUpdate(){
   var spendField=document.querySelector('[name="current_spend"]');
   if(spendField&&!spendField.dataset.manual){
     spendField.value='$'+est+'/mo';
+  }
+
+  // 6. Update center script multi-line section
+  var scriptMulti=document.getElementById('multiLineScript');
+  var scriptGrid=document.getElementById('scriptLineGrid');
+  if(numLines>=2){
+    scriptMulti.style.display='block';
+    var gridHTML='<div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:6px;"><strong>Line 1 (Main):</strong> captured above</div>';
+    for(var k=2;k<=numLines;k++){
+      gridHTML+='<div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:6px;"><strong>Line '+k+':</strong> <span style="color:var(--red);">⬅ fill in form panel</span></div>';
+    }
+    scriptGrid.innerHTML=gridHTML;
+  }else{
+    scriptMulti.style.display='none';
   }
 }
 
