@@ -608,9 +608,28 @@ function masterUpdate(){
   var scriptGrid=document.getElementById('scriptLineGrid');
   if(numLines>=2){
     scriptMulti.style.display='block';
-    var gridHTML='<div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:6px;"><strong>Line 1 (Main):</strong> captured above</div>';
+    var mainVal=document.querySelector('[name="main_phone"]');
+    var mainNum=mainVal?mainVal.value:'';
+    var gridHTML='<div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:6px;"><strong>Line 1 (Main):</strong> '+(mainNum||'<span style="color:var(--text3);">not entered yet</span>')+'</div>';
     for(var k=2;k<=numLines;k++){
-      gridHTML+='<div style="padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:6px;"><strong>Line '+k+':</strong> <span style="color:var(--red);">⬅ fill in form panel</span></div>';
+      var lineInput=document.querySelector('[name="line_'+k+'"]');
+      var lineVal=lineInput?lineInput.value:'';
+      if(lineVal){
+        gridHTML+='<div style="padding:6px 10px;background:#EDFCF0;border:1px solid #34C759;border-radius:6px;"><strong>Line '+k+':</strong> <span style="color:#1B7A2B;font-weight:600;">'+lineVal+' ✓</span></div>';
+      }else{
+        gridHTML+='<div style="padding:6px 10px;background:#FFF0F0;border:1px solid #FFD4D4;border-radius:6px;"><strong>Line '+k+':</strong> <span style="color:var(--red);font-weight:600;">⬅ REQUIRED</span></div>';
+      }
+    }
+    // Show fax if selected
+    var faxChecked=document.getElementById('faxm_y');
+    if(faxChecked&&faxChecked.checked){
+      var faxInput=document.querySelector('[name="fax_number"]');
+      var faxVal=faxInput?faxInput.value:'';
+      if(faxVal){
+        gridHTML+='<div style="padding:6px 10px;background:#EDFCF0;border:1px solid #34C759;border-radius:6px;"><strong>Fax:</strong> <span style="color:#1B7A2B;font-weight:600;">'+faxVal+' ✓</span></div>';
+      }else{
+        gridHTML+='<div style="padding:6px 10px;background:#FFF0F0;border:1px solid #FFD4D4;border-radius:6px;"><strong>Fax:</strong> <span style="color:var(--red);font-weight:600;">⬅ REQUIRED</span></div>';
+      }
     }
     scriptGrid.innerHTML=gridHTML;
   }else{
@@ -626,6 +645,18 @@ document.querySelector('[name="num_lines"]').addEventListener('input',function()
 document.querySelector('[name="num_lines"]').addEventListener('change',function(){masterUpdate();updateLineFields();});
 document.querySelectorAll('[name="cc_processing"]').forEach(function(r){
   r.addEventListener('change',function(){updatePricing();masterUpdate();});
+});
+
+// Listen on line fields + main phone + fax to live-update center script
+['main_phone','line_2','line_3','line_4','line_5','fax_number'].forEach(function(name){
+  var el=document.querySelector('[name="'+name+'"]');
+  if(el){
+    el.addEventListener('input',masterUpdate);
+    el.addEventListener('change',masterUpdate);
+  }
+});
+document.querySelectorAll('[name="has_fax_multi"]').forEach(function(r){
+  r.addEventListener('change',function(){toggleFaxField();masterUpdate();});
 });
 
 // Run on load
