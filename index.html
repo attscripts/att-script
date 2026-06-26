@@ -394,7 +394,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="field"><label>Notes</label><textarea name="notes" form="mainForm" rows="2" placeholder="Additional notes..."></textarea></div>
 
       <div class="form-divider"></div>
-      <div class="billing-bar"><strong>⚠</strong> Internet Air & Office@Hand are billed separately. Confirm customer is aware.</div>
+      <div class="billing-bar" id="billingBar" style="display:none;">⚠ Internet Air & Office@Hand are billed separately. Confirm customer is aware.</div>
       <button type="submit" form="mainForm" class="btn-submit" id="submitBtn">Submit to Google Sheets</button>
       <div style="text-align:center;"><button type="button" class="btn-clear" onclick="if(confirm('Clear all fields?')){document.getElementById('mainForm').reset();go('p1',document.querySelector('.nav-btn'));}">Clear Form</button></div>
     </div>
@@ -450,6 +450,43 @@ function resetForm(){
   const f=document.getElementById('mainForm');f.style.display='block';f.reset();
   document.querySelector('.form-panel-body').style.display='block';
   document.getElementById('successMsg').classList.remove('show');
+  document.getElementById('errorBanner').classList.remove('show');
+
+  // Reset plan lock
+  document.getElementById('pp').disabled=false;
+  document.getElementById('ps').disabled=false;
+  document.getElementById('pp').parentElement.style.opacity='1';
+  document.getElementById('ps').parentElement.style.opacity='1';
+
+  // Reset CC confirmation box
+  var box=document.getElementById('ccSelectBox');
+  var title=document.getElementById('ccSelectTitle');
+  var desc=document.getElementById('ccSelectDesc');
+  box.style.background='#FFF0F0';box.style.borderColor='#FF3B30';
+  title.style.color='#FF3B30';title.textContent='🚨 AGENT: SELECT THIS NOW IN THE FORM PANEL ➡';
+  desc.textContent='Select "Credit Card Processing? Yes/No" on the right panel. This automatically sets the correct pricing for the entire script. You MUST do this before moving forward.';
+
+  // Reset CC warning
+  var ccWarn=document.getElementById('ccWarning');
+  if(ccWarn)ccWarn.style.display='block';
+
+  // Reset multi-line section
+  document.getElementById('multiLineSection').style.display='none';
+  document.getElementById('multiLineScript').style.display='none';
+  var phonePicker=document.getElementById('phoneModelPicker');
+  if(phonePicker)phonePicker.style.display='none';
+  document.getElementById('faxNumField').style.display='none';
+  document.getElementById('billingBar').style.display='none';
+
+  // Reset main phone verify
+  var mainInput=document.querySelector('[name="main_phone"]');
+  mainInput.style.border='2px solid var(--orange)';mainInput.style.background='#FFF8EE';
+  var mainLabel=document.getElementById('mainPhoneVerify');
+  if(mainLabel){mainLabel.textContent='⚠ VERIFY WITH CUSTOMER — ask and confirm this number';mainLabel.style.color='#8B5E00';}
+
+  // Reset live spans
+  updatePricing();
+  masterUpdate();
   go('p1',document.querySelector('.nav-btn'));
 }
 
@@ -514,40 +551,20 @@ function updatePricing(){
 
   // Hide/show CC warning in Phase 3a
   var ccWarn=document.getElementById('ccWarning');
-  if(ccWarn){ccWarn.style.display=isPremium!==undefined?'none':'block';}
+  if(ccWarn){ccWarn.style.display=cc?'none':'block';}
 }
 
 document.querySelectorAll('[name="cc_processing"]').forEach(function(r){
   r.addEventListener('change',function(){
+    var isPrem=this.value==='Yes';
+
+    // Update pricing throughout script
     updatePricing();
     masterUpdate();
+
+    // Hide CC warning in Phase 3a
     var ccWarn=document.getElementById('ccWarning');
     if(ccWarn)ccWarn.style.display='none';
-
-    // Lock plan based on CC selection
-    if(isPrem){
-      document.getElementById('pp').checked=true;
-      document.getElementById('ps').disabled=true;
-      document.getElementById('pp').disabled=false;
-      document.querySelector('label[for="ps"]').style.opacity='0.4';
-      document.querySelector('label[for="ps"]').style.cursor='not-allowed';
-      document.querySelector('label[for="pp"]').style.opacity='1';
-      document.querySelector('label[for="pp"]').style.cursor='pointer';
-    }else{
-      document.getElementById('ps').checked=true;
-      document.getElementById('pp').disabled=true;
-      document.getElementById('ps').disabled=false;
-      document.querySelector('label[for="pp"]').style.opacity='0.4';
-      document.querySelector('label[for="pp"]').style.cursor='not-allowed';
-      document.querySelector('label[for="ps"]').style.opacity='1';
-      document.querySelector('label[for="ps"]').style.cursor='pointer';
-    }
-
-    // Update Phase 2 box to show confirmation
-    var box=document.getElementById('ccSelectBox');
-    var title=document.getElementById('ccSelectTitle');
-    var desc=document.getElementById('ccSelectDesc');
-    var isPrem=this.value==='Yes';
 
     // Lock plan selection
     var planPrem=document.getElementById('pp');
@@ -566,6 +583,10 @@ document.querySelectorAll('[name="cc_processing"]').forEach(function(r){
       planStd.parentElement.style.opacity='1';
     }
 
+    // Update Phase 2 confirmation box
+    var box=document.getElementById('ccSelectBox');
+    var title=document.getElementById('ccSelectTitle');
+    var desc=document.getElementById('ccSelectDesc');
     if(isPrem){
       box.style.background='var(--orange-bg)';
       box.style.borderColor='var(--orange)';
@@ -636,8 +657,8 @@ function toggleFaxField(){
   }
 }
 
-document.querySelector('[name="num_lines"]').addEventListener('input',updateLineFields);
-document.querySelector('[name="num_lines"]').addEventListener('change',updateLineFields);
+document.querySelector('[name="num_lines"]').addEventListener('input',function(){updateLineFields();masterUpdate();});
+document.querySelector('[name="num_lines"]').addEventListener('change',function(){updateLineFields();masterUpdate();});
 // ── MASTER AUTO-UPDATE: lines + CC → updates entire script ──
 var ESTIMATES={1:150,2:200,3:250,4:300,5:350};
 var STANDARD_PRICE={1:75,2:95,3:115,4:135,5:155};
@@ -735,15 +756,17 @@ function masterUpdate(){
 // Mark spend as manually edited so auto-fill doesn't overwrite
 document.querySelector('[name="current_spend"]').addEventListener('focus',function(){this.dataset.manual='1';});
 
-// Listen on lines + CC processing
-document.querySelector('[name="num_lines"]').addEventListener('input',function(){masterUpdate();updateLineFields();});
-document.querySelector('[name="num_lines"]').addEventListener('change',function(){masterUpdate();updateLineFields();});
-document.querySelectorAll('[name="cc_processing"]').forEach(function(r){
-  r.addEventListener('change',function(){updatePricing();masterUpdate();});
-});
-
 // Listen on line fields + main phone + fax to live-update center script
 ['main_phone','line_2','line_3','line_4','line_5','fax_number'].forEach(function(name){
+  var el=document.querySelector('[name="'+name+'"]');
+  if(el){
+    el.addEventListener('input',masterUpdate);
+    el.addEventListener('change',masterUpdate);
+  }
+});
+document.querySelectorAll('[name="has_fax_multi"]').forEach(function(r){
+  r.addEventListener('change',function(){toggleFaxField();masterUpdate();});
+});
 
 // Auto-fill BTN/BAN from best phone
 document.querySelector('[name="best_phone"]').addEventListener('input',function(){
@@ -757,17 +780,19 @@ function verifyMainPhone(el){
   el.style.border='2px solid var(--green)';
   el.style.background='var(--green-bg)';
   var label=document.getElementById('mainPhoneVerify');
-  if(label)label.innerHTML='✅ VERIFIED — confirmed with customer';
-  label.style.color='var(--green-dark)';
+  if(label){label.innerHTML='✅ VERIFIED — confirmed with customer';label.style.color='var(--green-dark)';}
 }
-  var el=document.querySelector('[name="'+name+'"]');
-  if(el){
-    el.addEventListener('input',masterUpdate);
-    el.addEventListener('change',masterUpdate);
-  }
-});
-document.querySelectorAll('[name="has_fax_multi"]').forEach(function(r){
-  r.addEventListener('change',function(){toggleFaxField();masterUpdate();});
+
+// Show billing bar only for Office@Hand or APP
+document.querySelectorAll('[name="solution_type"]').forEach(function(r){
+  r.addEventListener('change',function(){
+    var bar=document.getElementById('billingBar');
+    if(this.value==='Desk Phone'||this.value==='Cell App'||this.value==='Multi-Line'){
+      bar.style.display='block';
+    }else{
+      bar.style.display='none';
+    }
+  });
 });
 
 // Run on load
