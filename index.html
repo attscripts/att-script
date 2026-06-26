@@ -520,11 +520,47 @@ document.querySelectorAll('[name="cc_processing"]').forEach(function(r){
     var ccWarn=document.getElementById('ccWarning');
     if(ccWarn)ccWarn.style.display='none';
 
+    // Lock plan based on CC selection
+    if(isPrem){
+      document.getElementById('pp').checked=true;
+      document.getElementById('ps').disabled=true;
+      document.getElementById('pp').disabled=false;
+      document.querySelector('label[for="ps"]').style.opacity='0.4';
+      document.querySelector('label[for="ps"]').style.cursor='not-allowed';
+      document.querySelector('label[for="pp"]').style.opacity='1';
+      document.querySelector('label[for="pp"]').style.cursor='pointer';
+    }else{
+      document.getElementById('ps').checked=true;
+      document.getElementById('pp').disabled=true;
+      document.getElementById('ps').disabled=false;
+      document.querySelector('label[for="pp"]').style.opacity='0.4';
+      document.querySelector('label[for="pp"]').style.cursor='not-allowed';
+      document.querySelector('label[for="ps"]').style.opacity='1';
+      document.querySelector('label[for="ps"]').style.cursor='pointer';
+    }
+
     // Update Phase 2 box to show confirmation
     var box=document.getElementById('ccSelectBox');
     var title=document.getElementById('ccSelectTitle');
     var desc=document.getElementById('ccSelectDesc');
     var isPrem=this.value==='Yes';
+
+    // Lock plan selection
+    var planPrem=document.getElementById('pp');
+    var planStd=document.getElementById('ps');
+    if(isPrem){
+      planPrem.checked=true;
+      planStd.disabled=true;
+      planPrem.disabled=false;
+      planStd.parentElement.style.opacity='0.4';
+      planPrem.parentElement.style.opacity='1';
+    }else{
+      planStd.checked=true;
+      planPrem.disabled=true;
+      planStd.disabled=false;
+      planPrem.parentElement.style.opacity='0.4';
+      planStd.parentElement.style.opacity='1';
+    }
 
     if(isPrem){
       box.style.background='var(--orange-bg)';
