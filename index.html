@@ -382,7 +382,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="form-divider"></div>
       <div class="form-section-label">Billing & Tax</div>
       <div class="field"><label>Business Tax ID <span class="req">*</span></label><input type="text" name="tax_id" form="mainForm" required placeholder="Tax ID or 'Pending'"></div>
-      <div class="field"><label>BTN/BAN <span class="req">*</span></label><input type="text" name="btn_ban" form="mainForm" required placeholder="BTN/BAN"></div>
+      <div class="field"><label>BTN/BAN <span class="hint">(auto-filled from phone)</span></label><input type="text" name="btn_ban" form="mainForm" placeholder="Auto-fills from phone #"></div>
 
       <div class="form-divider"></div>
       <div class="form-section-label">Agent</div>
@@ -673,6 +673,13 @@ document.querySelectorAll('[name="cc_processing"]').forEach(function(r){
 
 // Listen on line fields + main phone + fax to live-update center script
 ['main_phone','line_2','line_3','line_4','line_5','fax_number'].forEach(function(name){
+
+// Auto-fill BTN/BAN from best phone
+document.querySelector('[name="best_phone"]').addEventListener('input',function(){
+  var btn=document.querySelector('[name="btn_ban"]');
+  if(btn&&!btn.dataset.manual)btn.value=this.value;
+});
+document.querySelector('[name="btn_ban"]').addEventListener('focus',function(){this.dataset.manual='1';});
   var el=document.querySelector('[name="'+name+'"]');
   if(el){
     el.addEventListener('input',masterUpdate);
