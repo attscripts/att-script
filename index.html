@@ -143,10 +143,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="page active" id="p1">
         <div class="page-title">Opening & Gatekeeper</div>
         <div class="page-subtitle">Phase 1 · AT&T copper-to-digital transition hook</div>
-        <div class="script-block say"><div class="label">SAY</div><p>Hello my name is ______ calling on behalf of an AT&T Solutions provider regarding AT&T's transition to an all-digital network and how that directly impacts your business.</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p>Hello my name is <span class="live" id="live_agent">[YOUR NAME]</span> calling on behalf of an AT&T Solutions provider regarding AT&T's transition to an all-digital network and how that directly impacts your business.</p></div>
         <div class="script-block ask"><div class="label">ASK</div><p>Are you the person that manages the AT&T account?</p></div>
-        <div class="tip"><strong>💡 IF NO</strong>"Okay, my goal is to keep your business connected during this transition, whom do I need to speak with? Is _____ available?"</div>
-        <div class="tip"><strong>💡 IF DM NOT AVAILABLE</strong>"Is there a direct line to reach _____? What is the best time to reach _____ at the business? Thank you for your time today, I look forward to speaking with _____ in the near future."</div>
+        <div class="tip"><strong>💡 IF NO</strong>"Okay, my goal is to keep your business connected during this transition, whom do I need to speak with? Is <span class="live" id="live_dm_p1">[DM NAME]</span> available?"</div>
+        <div class="tip"><strong>💡 IF DM NOT AVAILABLE</strong>"Is there a direct line to reach <span class="live" id="live_dm_p1b">[DM NAME]</span>? What is the best time to reach <span class="live" id="live_dm_p1c">[DM NAME]</span> at the business? Thank you for your time today, I look forward to speaking with <span class="live" id="live_dm_p1d">[DM NAME]</span> in the near future."</div>
         <div class="note">⚠ If YES → proceed to Phase 2 (DM Qualification)</div>
       </div>
 
@@ -155,7 +155,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         <div class="page-title">DM Qualification</div>
         <div class="page-subtitle">Phase 2 · Verify address, count lines, assess needs</div>
         <div class="script-block say"><div class="label">SAY</div><p>I'm sorry, I didn't catch your name, whom am I speaking with?</p></div>
-        <div class="script-block say"><div class="label">SAY</div><p><span class="live" id="live_dm">[DM NAME]</span>, my name is _______ and your account was sent to me for two reasons: one, it appears you are still using AT&T's shared copper connection, and secondly, AT&T Shared Fiber is not yet available to your business. Is your business still located at <span class="live" id="live_address">[ADDRESS]</span>?</p></div>
+        <div class="script-block say"><div class="label">SAY</div><p><span class="live" id="live_dm">[DM NAME]</span>, my name is <span class="live" id="live_agent_p2">[YOUR NAME]</span> and your account was sent to me for two reasons: one, it appears you are still using AT&T's shared copper connection, and secondly, AT&T Shared Fiber is not yet available to your business. Is your business still located at <span class="live" id="live_address">[ADDRESS]</span>?</p></div>
         <div class="tip"><strong>💡 IF YES</strong></div>
         <div class="script-block ask"><div class="label">ASK</div><p>Okay, how many phone numbers are you still using at the business?</p></div>
         <div class="script-block ask"><div class="label">ASK</div><p>Do you process credit card transactions at the business?</p></div>
@@ -455,8 +455,10 @@ function resetForm(){
   // Reset plan lock
   document.getElementById('pp').disabled=false;
   document.getElementById('ps').disabled=false;
-  document.getElementById('pp').parentElement.style.opacity='1';
-  document.getElementById('ps').parentElement.style.opacity='1';
+  var lPrem=document.querySelector('label[for="pp"]');
+  var lStd=document.querySelector('label[for="ps"]');
+  lPrem.style.opacity='1';lPrem.style.pointerEvents='auto';lPrem.style.cursor='pointer';
+  lStd.style.opacity='1';lStd.style.pointerEvents='auto';lStd.style.cursor='pointer';
 
   // Reset CC confirmation box
   var box=document.getElementById('ccSelectBox');
@@ -496,9 +498,10 @@ const lb={
   'service_address':{ids:['live_address'],fallback:'[ADDRESS]'},
   'dm_email':{ids:['live_email_6a','live_email_7','live_email_7b'],fallback:'[EMAIL]'},
   'legal_business_name':{ids:['live_bizname'],fallback:'[BUSINESS NAME]'},
-  'first_name':{ids:['live_dm'],fallback:'[DM NAME]'},
+  'first_name':{ids:['live_dm','live_dm_p1','live_dm_p1b','live_dm_p1c','live_dm_p1d'],fallback:'[DM NAME]'},
   'best_phone':{ids:['live_phone_6a','live_phone_8'],fallback:'[PHONE]'},
-  'num_lines':{ids:['live_lines','live_lines2','live_lines_7'],fallback:'[#]'}
+  'num_lines':{ids:['live_lines','live_lines2','live_lines_7'],fallback:'[#]'},
+  'agent_name':{ids:['live_agent','live_agent_p2'],fallback:'[YOUR NAME]'}
 };
 document.querySelectorAll('input,textarea,select').forEach(f=>{
   const b=lb[f.name];
@@ -566,21 +569,31 @@ document.querySelectorAll('[name="cc_processing"]').forEach(function(r){
     var ccWarn=document.getElementById('ccWarning');
     if(ccWarn)ccWarn.style.display='none';
 
-    // Lock plan selection
+    // Lock plan selection — disable input + block label click
     var planPrem=document.getElementById('pp');
     var planStd=document.getElementById('ps');
+    var labelPrem=document.querySelector('label[for="pp"]');
+    var labelStd=document.querySelector('label[for="ps"]');
     if(isPrem){
       planPrem.checked=true;
       planStd.disabled=true;
       planPrem.disabled=false;
-      planStd.parentElement.style.opacity='0.4';
-      planPrem.parentElement.style.opacity='1';
+      labelStd.style.opacity='0.4';
+      labelStd.style.pointerEvents='none';
+      labelStd.style.cursor='not-allowed';
+      labelPrem.style.opacity='1';
+      labelPrem.style.pointerEvents='auto';
+      labelPrem.style.cursor='pointer';
     }else{
       planStd.checked=true;
       planPrem.disabled=true;
       planStd.disabled=false;
-      planPrem.parentElement.style.opacity='0.4';
-      planStd.parentElement.style.opacity='1';
+      labelPrem.style.opacity='0.4';
+      labelPrem.style.pointerEvents='none';
+      labelPrem.style.cursor='not-allowed';
+      labelStd.style.opacity='1';
+      labelStd.style.pointerEvents='auto';
+      labelStd.style.cursor='pointer';
     }
 
     // Update Phase 2 confirmation box
@@ -812,7 +825,6 @@ function vicidialAutoFill(){
     'phone':'best_phone',
     'address1':'service_address',
     'address2':'dm_email',
-    'comments':'notes',
     'vendor_id':'btn_ban',
     'alt_phone':'main_phone'
   };
