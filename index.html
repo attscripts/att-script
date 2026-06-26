@@ -159,15 +159,15 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         <div class="tip"><strong>💡 IF YES</strong></div>
         <div class="script-block ask"><div class="label">ASK</div><p>Okay, how many phone numbers are you still using at the business?</p></div>
         <div class="script-block ask"><div class="label">ASK</div><p>Do you process credit card transactions at the business?</p></div>
-        <div style="margin:8px 0;padding:12px 14px;background:#FFF0F0;border:2px solid #FF3B30;border-radius:8px;">
-          <div style="font-size:12px;font-weight:700;color:#FF3B30;margin-bottom:4px;">🚨 AGENT: SELECT THIS NOW IN THE FORM PANEL ➡</div>
-          <div style="font-size:11px;color:#1D1D1F;line-height:1.5;">Select <strong>"Credit Card Processing? Yes/No"</strong> on the right panel. This automatically sets the correct pricing for the entire script. You MUST do this before moving forward.</div>
+        <div id="ccSelectBox" style="margin:8px 0;padding:12px 14px;background:#FFF0F0;border:2px solid #FF3B30;border-radius:8px;">
+          <div id="ccSelectTitle" style="font-size:12px;font-weight:700;color:#FF3B30;margin-bottom:4px;">🚨 AGENT: SELECT THIS NOW IN THE FORM PANEL ➡</div>
+          <div id="ccSelectDesc" style="font-size:11px;color:#1D1D1F;line-height:1.5;">Select <strong>"Credit Card Processing? Yes/No"</strong> on the right panel. This automatically sets the correct pricing for the entire script. You MUST do this before moving forward.</div>
           <div style="display:flex;gap:8px;margin-top:8px;">
             <div style="flex:1;padding:8px;background:var(--orange-bg);border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:#8B5E00;">YES = Premium $105/mo</div>
             <div style="flex:1;padding:8px;background:var(--blue-bg);border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--blue-dark);">NO = Standard $65/mo</div>
           </div>
         </div>
-        <div class="note">⚠ 1 line → go to Phase 3a (Desk Phone) or 3b (Cell Phone). 2+ lines → go to Phase 4 (Multi-Line).</div>
+        <div class="note">⚠ <span id="navNote">1 line → go to Phase 3a (Desk Phone) or 3b (Cell Phone). 2+ lines → go to Phase 4 (Multi-Line).</span></div>
         <div class="tip"><strong>💡 IF ADDRESS IS WRONG</strong>"What is the correct address for your business so I can update my records and verify if Shared Fiber is available? Is it okay if I call you back later today after I verify which AT&T Services are available at your address? What is the best number to call you back at?"</div>
       </div>
 
@@ -516,8 +516,29 @@ function updatePricing(){
 document.querySelectorAll('[name="cc_processing"]').forEach(function(r){
   r.addEventListener('change',function(){
     updatePricing();
+    masterUpdate();
     var ccWarn=document.getElementById('ccWarning');
     if(ccWarn)ccWarn.style.display='none';
+
+    // Update Phase 2 box to show confirmation
+    var box=document.getElementById('ccSelectBox');
+    var title=document.getElementById('ccSelectTitle');
+    var desc=document.getElementById('ccSelectDesc');
+    var isPrem=this.value==='Yes';
+
+    if(isPrem){
+      box.style.background='var(--orange-bg)';
+      box.style.borderColor='var(--orange)';
+      title.style.color='#8B5E00';
+      title.textContent='✅ SELECTED: YES — PREMIUM $105/mo';
+      desc.textContent='Credit card processing = YES. All pricing in the script is now set to Premium.';
+    }else{
+      box.style.background='var(--blue-bg)';
+      box.style.borderColor='var(--blue)';
+      title.style.color='var(--blue-dark)';
+      title.textContent='✅ SELECTED: NO — STANDARD $65/mo';
+      desc.textContent='No credit card processing. All pricing in the script is now set to Standard.';
+    }
   });
 });
 // ── MULTI-LINE FIELDS TOGGLE ──
@@ -625,6 +646,16 @@ function masterUpdate(){
   var spendField=document.querySelector('[name="current_spend"]');
   if(spendField&&!spendField.dataset.manual){
     spendField.value='$'+est+'/mo';
+  }
+
+  // 5b. Update navigation note in Phase 2
+  var navNote=document.getElementById('navNote');
+  if(navNote){
+    if(numLines===1){
+      navNote.textContent='Customer has 1 line → go to Phase 3a (Desk Phone) or 3b (Cell Phone)';
+    }else{
+      navNote.textContent='Customer has '+numLines+' lines → go to Phase 4 (Multi-Line)';
+    }
   }
 
   // 6. Update center script multi-line section
