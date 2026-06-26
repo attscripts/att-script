@@ -355,7 +355,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="form-divider"></div>
       <div class="form-section-label">Contact</div>
       <div class="field"><label>Best Phone # <span class="req">*</span></label><input type="tel" name="best_phone" form="mainForm" required placeholder="(555) 555-5555"></div>
-      <div class="field"><label>What is the main number listed for your business? <span class="req">*</span></label><input type="tel" name="main_phone" form="mainForm" required placeholder="Main business line (Line 1)"></div>
+      <div class="field" id="mainPhoneField">
+        <label>What is the main number listed for your business? <span class="req">*</span></label>
+        <div id="mainPhoneVerify" style="font-size:10px;font-weight:700;color:#8B5E00;margin-bottom:3px;">⚠ VERIFY WITH CUSTOMER — ask and confirm this number</div>
+        <input type="tel" name="main_phone" form="mainForm" required placeholder="Main business line (Line 1)" style="border:2px solid var(--orange);background:#FFF8EE;" onfocus="verifyMainPhone(this)">
+      </div>
 
       <!-- MULTI-LINE: appears when # of lines >= 2 -->
       <div id="multiLineSection" style="display:none;margin-top:8px;padding:10px 12px;background:#F5EEFB;border:1px solid #C9A4E8;border-radius:8px;">
@@ -747,6 +751,15 @@ document.querySelector('[name="best_phone"]').addEventListener('input',function(
   if(btn&&!btn.dataset.manual)btn.value=this.value;
 });
 document.querySelector('[name="btn_ban"]').addEventListener('focus',function(){this.dataset.manual='1';});
+
+// Main phone verify
+function verifyMainPhone(el){
+  el.style.border='2px solid var(--green)';
+  el.style.background='var(--green-bg)';
+  var label=document.getElementById('mainPhoneVerify');
+  if(label)label.innerHTML='✅ VERIFIED — confirmed with customer';
+  label.style.color='var(--green-dark)';
+}
   var el=document.querySelector('[name="'+name+'"]');
   if(el){
     el.addEventListener('input',masterUpdate);
