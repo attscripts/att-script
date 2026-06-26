@@ -160,11 +160,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         <div class="script-block ask"><div class="label">ASK</div><p>Okay, how many phone numbers are you still using at the business?</p></div>
         <div class="script-block ask"><div class="label">ASK</div><p>Do you process credit card transactions at the business?</p></div>
         <div id="ccSelectBox" style="margin:8px 0;padding:12px 14px;background:#FFF0F0;border:2px solid #FF3B30;border-radius:8px;">
-          <div id="ccSelectTitle" style="font-size:12px;font-weight:700;color:#FF3B30;margin-bottom:4px;">🚨 AGENT: SELECT THIS NOW IN THE FORM PANEL ➡</div>
-          <div id="ccSelectDesc" style="font-size:11px;color:#1D1D1F;line-height:1.5;">Select <strong>"Credit Card Processing? Yes/No"</strong> on the right panel. This automatically sets the correct pricing for the entire script. You MUST do this before moving forward.</div>
+          <div id="ccSelectTitle" style="font-size:12px;font-weight:700;color:#FF3B30;margin-bottom:4px;">🚨 AGENT: SELECT CREDIT CARD PROCESSING</div>
+          <div id="ccSelectDesc" style="font-size:11px;color:#1D1D1F;line-height:1.5;">Click one of the buttons below OR select in the form panel on the right. This sets the correct pricing for the entire script.</div>
           <div style="display:flex;gap:8px;margin-top:8px;">
-            <div style="flex:1;padding:8px;background:var(--orange-bg);border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:#8B5E00;">YES = Premium $105/mo</div>
-            <div style="flex:1;padding:8px;background:var(--blue-bg);border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--blue-dark);">NO = Standard $65/mo</div>
+            <button type="button" onclick="selectCC('Yes')" style="flex:1;padding:10px;background:var(--orange-bg);border:2px solid var(--orange);border-radius:6px;text-align:center;font-size:12px;font-weight:700;color:#8B5E00;cursor:pointer;font-family:inherit;transition:all .15s;">YES = Premium $105/mo</button>
+            <button type="button" onclick="selectCC('No')" style="flex:1;padding:10px;background:var(--blue-bg);border:2px solid var(--blue);border-radius:6px;text-align:center;font-size:12px;font-weight:700;color:var(--blue-dark);cursor:pointer;font-family:inherit;transition:all .15s;">NO = Standard $65/mo</button>
           </div>
         </div>
         <div class="note">⚠ <span id="navNote">1 line → go to Phase 3a (Desk Phone) or 3b (Cell Phone). 2+ lines → go to Phase 4 (Multi-Line).</span></div>
@@ -507,6 +507,15 @@ document.querySelectorAll('input,textarea,select').forEach(f=>{
   const b=lb[f.name];
   if(b)f.addEventListener('input',function(){b.ids.forEach(id=>updateLive(id,this.value,b.fallback));});
 });
+// ── SELECT CC FROM SCRIPT CENTER PANEL ──
+function selectCC(value){
+  // Check the form panel radio
+  if(value==='Yes')document.getElementById('cc_y').checked=true;
+  else document.getElementById('cc_n').checked=true;
+  // Trigger the same change event as if they clicked in the form panel
+  document.getElementById(value==='Yes'?'cc_y':'cc_n').dispatchEvent(new Event('change',{bubbles:true}));
+}
+
 // ── AUTO-UPDATE PRICES FROM CC PROCESSING ──
 function updatePricing(){
   var cc=document.querySelector('[name="cc_processing"]:checked');
